@@ -317,7 +317,7 @@ if __name__ == '__main__':
                 <div class="text-center">
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Construindo o Dashboard: Passo a Passo</h2>
                     <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
-                        Agora que o ambiente está configurado, vamos transformar nosso app mínimo em um dashboard completo para análise de dados de ecocardiogramas.
+                        Agora que o ambiente está configurado, vamos transformar nosso app mínimo em um dashboard completo para análise de dados de ecocardiogramas. Cada passo adiciona uma nova funcionalidade ao nosso projeto.
                     </p>
                 </div>
                 <div class="space-y-24 mt-16">
@@ -326,7 +326,7 @@ if __name__ == '__main__':
                     <div class="flex flex-col md:flex-row items-center gap-12">
                         <div class="w-full md:w-3/5 lg:w-2/3">
                             <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
-                                <img src="https://placehold.co/800x400/e2e8f0/334155?text=Kaggle+Dataset+Page" alt="Página do Kaggle" class="rounded-lg w-full h-auto">
+                                <img src="assets/images/Kaggle_Dataset_Page.png" alt="Página do Kaggle" class="rounded-lg w-full h-auto">
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
@@ -357,17 +357,21 @@ if __name__ == '__main__':
                                                 <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py</span>
                                                 <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step2" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
                                             </div>
-                                            <pre class="m-0"><code id="code-block-step2" class="language-python p-4 block overflow-x-auto">import dash_mantine_components as dmc
+                                            <pre class="m-0"><code id="code-block-step2" class="language-python p-4 block overflow-x-auto"># Importações necessárias para o projeto
+import dash_mantine_components as dmc
 from dash import Dash, Input, Output, clientside_callback, dcc
 import dash_ag_grid as dag
 import pandas as pd
 import plotly.express as px
 from dash_iconify import DashIconify
 
+# Inicializa a aplicação Dash
 app = Dash()
-dataframe = pd.read_csv("heart.csv")
-# ... (código do layout e callbacks virão aqui)
 
+# Carrega os dados do ecocardiograma
+dataframe = pd.read_csv("heart.csv")
+
+# Execute o arquivo para testar se está funcionando
 if __name__ == "__main__":
     app.run(debug=True)</code></pre>
                                         </div>
@@ -377,11 +381,11 @@ if __name__ == "__main__":
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 2: Imports e Leitura dos Dados</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Apague o código mínimo e comece de novo com as importações corretas para o projeto final. Carregue o arquivo `heart.csv` que você baixou.</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Apague o código mínimo e comece com as importações específicas. Carregue o arquivo [`heart.csv`](heart.csv:1) que você baixou. Execute para verificar se não há erros de importação.</p>
                         </div>
                     </div>
 
-                    <!-- Step 3: Building the Layout -->
+                    <!-- Step 3: Basic Layout Structure -->
                     <div class="flex flex-col md:flex-row items-center gap-12 tab-container">
                         <div class="w-full md:w-3/5 lg:w-2/3">
                             <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
@@ -395,44 +399,50 @@ if __name__ == "__main__":
                                     <div class="tab-content" id="code-step3">
                                         <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
                                             <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (layout)</span>
-                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step3" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (estrutura básica)</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step3" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
                                             </div>
-                                            <pre class="m-0"><code id="code-block-step3" class="language-python p-4 block overflow-x-auto">layout = dmc.AppShell(
+                                            <pre class="m-0"><code id="code-block-step3" class="language-python p-4 block overflow-x-auto"># Adicione após carregar os dados, antes do if __name__:
+
+# Define a estrutura básica do layout
+layout = dmc.AppShell(
     [
         dmc.AppShellHeader(
             dmc.Group(
                 [
                     dmc.Title("Dashboard Ecocardiograma", order=1, c="blue"),
-                    # O botão do tema virá depois
                 ],
                 justify="space-between",
-                style={"flex": 1}, h="100%", px="md",
+                style={"flex": 1},
+                h="100%",
+                px="md",
             ),
         ),
         dmc.AppShellMain(
-            # O conteúdo do grid virá depois
+            dmc.Text("Conteúdo será adicionado aqui", size="lg", ta="center", py="xl")
         ),
     ],
-    header={"height": 60}, padding="md",
+    header={"height": 60},
+    padding="md",
 )
 
+# Aplica o layout usando MantineProvider
 app.layout = dmc.MantineProvider(layout)</code></pre>
                                         </div>
                                     </div>
                                     <div class="tab-content hidden" id="result-step3">
-                                        <img src="https://placehold.co/800x200/e2e8f0/334155?text=Resultado:+App+com+Cabeçalho" alt="App com Cabeçalho" class="rounded-lg w-full h-auto">
+                                        <img src="assets/images/App+com+Cabeçalho+e+Estrutura+Básica.png" alt="App com Cabeçalho" class="rounded-lg w-full h-auto">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 3: Estrutura do Layout</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Usamos o `AppShell` do Dash Mantine Components para criar uma estrutura de página moderna. Neste passo, definimos apenas o cabeçalho (`AppShellHeader`) com o título do nosso dashboard.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 3: Estrutura Básica do Layout</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Criamos a estrutura usando [`dmc.AppShell()`](main.py:1) com cabeçalho ([`AppShellHeader`](main.py:1)) e área principal ([`AppShellMain`](main.py:1)). O [`MantineProvider`](main.py:1) fornece temas consistentes.</p>
                         </div>
                     </div>
-                    
-                    <!-- Step 4: Add Graphs -->
+
+                    <!-- Step 4: First Graph -->
                     <div class="flex flex-col md:flex-row-reverse items-center gap-12 tab-container">
                         <div class="w-full md:w-3/5 lg:w-2/3">
                             <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
@@ -446,61 +456,314 @@ app.layout = dmc.MantineProvider(layout)</code></pre>
                                     <div class="tab-content" id="code-step4">
                                         <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
                                             <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (Grid)</span>
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (primeiro gráfico)</span>
                                                 <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step4" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
                                             </div>
-                                            <pre class="m-0"><code id="code-block-step4" class="language-python p-4 block overflow-x-auto"># Dentro do dmc.AppShellMain:
-dmc.Grid(
-    children=[
-        dmc.GridCol(
-            dmc.Card(
-                children=[
-                    dmc.CardSection(dmc.Text("Distribuição das Idades", fw=500), withBorder=True, inheritPadding=True, py="xs"),
-                    dmc.CardSection(dcc.Graph(figure=px.histogram(dataframe, x="age", nbins=20))),
-                ],
-                withBorder=True, shadow="sm", radius="md",
-            ),
-            span="auto",
+                                            <pre class="m-0"><code id="code-block-step4" class="language-python p-4 block overflow-x-auto"># Substitua o conteúdo do dmc.AppShellMain por:
+dmc.AppShellMain(
+    dmc.Container(
+        dmc.Card(
+            children=[
+                dmc.CardSection(
+                    dmc.Text("Distribuição das Idades", fw=500, size="lg"),
+                    withBorder=True,
+                    inheritPadding=True,
+                    py="xs"
+                ),
+                dmc.CardSection(
+                    dcc.Graph(
+                        figure=px.histogram(
+                            dataframe,
+                            x="age",
+                            nbins=20,
+                            title="Histograma das Idades dos Pacientes"
+                        )
+                    )
+                ),
+            ],
+            withBorder=True,
+            shadow="sm",
+            radius="md",
+            mt="md"
         ),
-        dmc.GridCol(
-            dmc.Card(
-                children=[
-                    dmc.CardSection(dmc.Text("Distribuição por Sexo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
-                    dmc.CardSection(dcc.Graph(figure=px.bar(dataframe["sex"].value_counts().rename_axis("sex").reset_index(name="count"), x="sex", y="count"))),
-                ],
-                withBorder=True, shadow="sm", radius="md",
-            ),
-            span="auto",
-        ),
-        # ... outros gráficos seguem o mesmo padrão ...
-    ],
-    gutter="xs",
+        size="xl"
+    )
 )</code></pre>
                                         </div>
                                     </div>
-                                     <div class="tab-content hidden" id="result-step4">
-                                        <img src="https://placehold.co/800x600/e2e8f0/334155?text=Resultado:+Gráficos+Adicionados" alt="App com Gráficos" class="rounded-lg w-full h-auto">
+                                    <div class="tab-content hidden" id="result-step4">
+                                        <img src="assets/images/App+com+Primeiro+Gráfico.png" alt="App com Primeiro Gráfico" class="rounded-lg w-full h-auto">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 4: Adicionando os Gráficos</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Dentro do `AppShellMain`, usamos um `dmc.Grid` para organizar nossos gráficos. Cada gráfico é colocado dentro de um `dmc.Card` para um visual limpo. Usamos `dcc.Graph` para exibir as figuras criadas com o Plotly Express (`px.histogram`, `px.bar`, etc.).</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 4: Primeiro Gráfico</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Adicionamos nosso primeiro gráfico usando [`px.histogram()`](main.py:1) dentro de um [`dmc.Card()`](main.py:1). O card possui seções para título e conteúdo, criando uma apresentação organizada.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Multiple Graphs with Grid -->
+                    <div class="flex flex-col md:flex-row items-center gap-12 tab-container">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <div class="border-b border-gray-200 dark:border-gray-700">
+                                    <nav class="-mb-px flex space-x-6">
+                                        <button class="tab active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="code-step5">Código</button>
+                                        <button class="tab whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-gray-500" data-tab="result-step5">Resultado Parcial</button>
+                                    </nav>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="tab-content" id="code-step5">
+                                        <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (múltiplos gráficos)</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step5" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
+                                            </div>
+                                            <pre class="m-0"><code id="code-block-step5" class="language-python p-4 block overflow-x-auto"># Substitua o dmc.AppShellMain com um grid de gráficos:
+dmc.AppShellMain(
+    dmc.Grid(
+        children=[
+            # Gráfico 1: Distribuição das Idades
+            dmc.GridCol(
+                dmc.Card([
+                    dmc.CardSection(dmc.Text("Distribuição das Idades", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                    dmc.CardSection(dcc.Graph(figure=px.histogram(dataframe, x="age", nbins=20))),
+                ], withBorder=True, shadow="sm", radius="md"),
+                span="auto",
+            ),
+            # Gráfico 2: Distribuição por Sexo
+            dmc.GridCol(
+                dmc.Card([
+                    dmc.CardSection(dmc.Text("Distribuição por Sexo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                    dmc.CardSection(dcc.Graph(figure=px.bar(
+                        dataframe["sex"].value_counts().rename_axis("sex").reset_index(name="count"),
+                        x="sex", y="count"
+                    ))),
+                ], withBorder=True, shadow="sm", radius="md"),
+                span="auto",
+            ),
+            # Gráfico 3: Scatter Plot
+            dmc.GridCol(
+                dmc.Card([
+                    dmc.CardSection(dmc.Text("Colesterol vs. Frequência Máxima", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                    dmc.CardSection(dcc.Graph(figure=px.scatter(dataframe, x="chol", y="thalach", color="target"))),
+                ], withBorder=True, shadow="sm", radius="md"),
+                span="auto",
+            ),
+            # Gráfico 4: Box Plot
+            dmc.GridCol(
+                dmc.Card([
+                    dmc.CardSection(dmc.Text("Pressão Arterial por Classe Alvo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                    dmc.CardSection(dcc.Graph(figure=px.box(dataframe, x="target", y="trestbps"))),
+                ], withBorder=True, shadow="sm", radius="md"),
+                span="auto",
+            ),
+        ],
+        gutter="xs",
+    ),
+)</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content hidden" id="result-step5">
+                                        <img src="assets/images/Grid+com+Múltiplos+Gráficos.png" alt="Grid com Múltiplos Gráficos" class="rounded-lg w-full h-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 5: Sistema de Grid com Múltiplos Gráficos</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Implementamos um sistema de grid usando [`dmc.Grid()`](main.py:1) e [`dmc.GridCol()`](main.py:1) para organizar quatro tipos diferentes de gráficos: histograma, barra, scatter e box plot.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Add Data Table -->
+                    <div class="flex flex-col md:flex-row-reverse items-center gap-12 tab-container">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <div class="border-b border-gray-200 dark:border-gray-700">
+                                    <nav class="-mb-px flex space-x-6">
+                                        <button class="tab active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="code-step6">Código</button>
+                                        <button class="tab whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-gray-500" data-tab="result-step6">Resultado Parcial</button>
+                                    </nav>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="tab-content" id="code-step6">
+                                        <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (tabela de dados)</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step6" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
+                                            </div>
+                                            <pre class="m-0"><code id="code-block-step6" class="language-python p-4 block overflow-x-auto"># Adicione após carregar o dataframe, antes do layout:
+
+# Cria a tabela interativa
+tabela = dag.AgGrid(
+    rowData=dataframe.to_dict("records"),
+    columnDefs=[{"field": i} for i in dataframe.columns],
+    defaultColDef={"resizable": True, "sortable": True, "filter": True},
+    className="ag-theme-alpine",
+)
+
+# Depois, adicione ao final do Grid, antes de fechar o children=[]:
+            # Tabela de Dados - nova linha completa
+            dmc.GridCol(
+                dmc.Card([
+                    dmc.CardSection(
+                        dmc.Text("Tabela de Dados", fw=500),
+                        withBorder=True,
+                        inheritPadding=True,
+                        py="xs"
+                    ),
+                    dmc.CardSection(tabela),
+                ], withBorder=True, shadow="sm", radius="md"),
+                span=12,  # Ocupa toda a largura
+            ),</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content hidden" id="result-step6">
+                                        <img src="assets/images/Dashboard+com+Tabela+de+Dados.png" alt="Dashboard com Tabela" class="rounded-lg w-full h-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 6: Tabela de Dados Interativa</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Adicionamos uma tabela interativa usando [`dag.AgGrid()`](main.py:1) que permite ordenação, filtro e redimensionamento de colunas. A tabela ocupa a largura total com [`span=12`](main.py:1).</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Theme Toggle Button -->
+                    <div class="flex flex-col md:flex-row items-center gap-12 tab-container">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <div class="border-b border-gray-200 dark:border-gray-700">
+                                    <nav class="-mb-px flex space-x-6">
+                                        <button class="tab active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="code-step7">Código</button>
+                                        <button class="tab whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-gray-500" data-tab="result-step7">Resultado Parcial</button>
+                                    </nav>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="tab-content" id="code-step7">
+                                        <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (botão de tema)</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step7" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002 2z" /></svg></button>
+                                            </div>
+                                            <pre class="m-0"><code id="code-block-step7" class="language-python p-4 block overflow-x-auto"># Adicione após as importações, antes de carregar o dataframe:
+
+# Botão para alternar entre tema claro e escuro
+botao_troca_tema = dmc.Switch(
+    offLabel=DashIconify(icon="radix-icons:sun", width=15),
+    onLabel=DashIconify(icon="radix-icons:moon", width=15),
+    id="color-scheme-switch",
+    persistence=True,
+    color="grey",
+)
+
+# Modifique o cabeçalho para incluir o botão:
+        dmc.AppShellHeader(
+            dmc.Group(
+                [
+                    dmc.Title("Dashboard Ecocardiograma", order=1, c="blue"),
+                    botao_troca_tema,  # Adiciona o botão aqui
+                ],
+                justify="space-between",
+                style={"flex": 1},
+                h="100%",
+                px="md",
+            ),
+        ),</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content hidden" id="result-step7">
+                                        <img src="assets/images/Dashboard+com+Botão+de+Tema.png" alt="Dashboard com Botão de Tema" class="rounded-lg w-full h-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 7: Botão de Alternância de Tema</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Adicionamos um [`dmc.Switch()`](main.py:1) com ícones do [`DashIconify`](main.py:1) para alternar entre temas claro e escuro. O [`persistence=True`](main.py:1) mantém a preferência do usuário.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8: Interactive Callbacks -->
+                    <div class="flex flex-col md:flex-row-reverse items-center gap-12 tab-container">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <div class="border-b border-gray-200 dark:border-gray-700">
+                                    <nav class="-mb-px flex space-x-6">
+                                        <button class="tab active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="code-step8">Código</button>
+                                        <button class="tab whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-gray-500" data-tab="result-step8">Resultado Parcial</button>
+                                    </nav>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="tab-content" id="code-step8">
+                                        <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (callbacks)</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step8" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002 2z" /></svg></button>
+                                            </div>
+                                            <pre class="m-0"><code id="code-block-step8" class="language-python p-4 block overflow-x-auto"># Adicione após definir app.layout, antes do if __name__:
+
+# Callback para alternar o tema usando JavaScript no cliente
+clientside_callback(
+    """
+    (switchOn) => {
+        document.documentElement.setAttribute(
+            'data-mantine-color-scheme',
+            switchOn ? 'dark' : 'light'
+        );
+        return window.dash_clientside.no_update
+    }
+    """,
+    Output("color-scheme-switch", "id"),
+    Input("color-scheme-switch", "checked"),
+)
+
+# Adicione também um ID ao AppShell para controle de tema:
+# Modifique a linha do dmc.AppShell para incluir:
+# dmc.AppShell([...], header={"height": 60}, padding="md", id="appshell")</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content hidden" id="result-step8">
+                                        <img src="assets/images/Dashboard+Totalmente+Interativo.png" alt="Dashboard Interativo" class="rounded-lg w-full h-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 8: Callbacks e Interatividade</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Implementamos um [`clientside_callback()`](main.py:1) que executa JavaScript no navegador para alternar o tema instantaneamente, sem precisar comunicar com o servidor Python.</p>
                         </div>
                     </div>
                     
-                    <!-- Step 5: Final Code -->
+                    <!-- Step 9: Final Result -->
                     <div>
-                         <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">Passo 5: Resultado Final Interativo</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Após adicionar todos os gráficos, a tabela de dados e a interatividade do botão de tema, este é o resultado final. Interaja com o dashboard abaixo para ver o produto completo do nosso tutorial.</p>
-                        <div class="mt-4">
-                            <iframe src="https://py.cafe/embed/joaosnet/ecg-analysis-dash?pycafe-theme=light&pycafe-link-to-app=false" width="100%" height="400px" style="border: 1px solid #e6e6e6; border-radius: 8px;"></iframe>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">Passo 9: Dashboard Completo e Interativo</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Parabéns! Você construiu um dashboard completo seguindo uma abordagem incremental. Cada passo adicionou uma funcionalidade específica, permitindo compreender como cada elemento contribui para o resultado final.</p>
+                        
+                        <div class="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                            <h4 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">📚 Conceitos Aprendidos:</h4>
+                            <ul class="space-y-2 text-blue-800 dark:text-blue-200">
+                                <li>• <strong>Importações organizadas:</strong> Como estruturar as dependências do projeto</li>
+                                <li>• <strong>Layout responsivo:</strong> Uso do AppShell e sistema de Grid</li>
+                                <li>• <strong>Componentes visuais:</strong> Cards, seções e elementos de UI</li>
+                                <li>• <strong>Visualizações de dados:</strong> Diferentes tipos de gráficos com Plotly</li>
+                                <li>• <strong>Tabelas interativas:</strong> AG-Grid com funcionalidades avançadas</li>
+                                <li>• <strong>Temas dinâmicos:</strong> Sistema de alternância claro/escuro</li>
+                                <li>• <strong>Callbacks:</strong> Interatividade client-side e server-side</li>
+                            </ul>
                         </div>
-                        <p class="mt-8 text-gray-600 dark:text-gray-400 leading-relaxed">Para referência, aqui está o código completo que gera o dashboard acima:</p>
+                        
+                        <div class="mt-8">
+                            <iframe src="https://py.cafe/embed/joaosnet/ecg-analysis-dash?pycafe-theme=light&pycafe-link-to-app=false" width="100%" height="500px" style="border: 1px solid #e6e6e6; border-radius: 8px;"></iframe>
+                        </div>
+                        
+                        <p class="mt-8 text-gray-600 dark:text-gray-400 leading-relaxed">Para referência, aqui está o código completo final:</p>
                         <div class="mt-4 rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
                             <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (final)</span>
+                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (código completo)</span>
                                 <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-final-full" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
                             </div>
                             <pre class="m-0"><code id="code-final-full" class="language-python p-4 block overflow-x-auto">{/* Código final completo será inserido aqui pelo script */}</code></pre>
@@ -678,24 +941,20 @@ dmc.Grid(
             
             const finalCodeBlock = document.getElementById('code-final-full');
             if(finalCodeBlock) {
-                finalCodeBlock.textContent = `# Imports necessarios a implementacao
+                finalCodeBlock.textContent = `# Passo a Passo Completo: Dashboard de Ecocardiograma
+
+# 1. Importações necessárias
 import dash_mantine_components as dmc
-from dash import (
-    Dash,
-    Input,
-    Output,
-    clientside_callback,
-    dcc,
-)
+from dash import Dash, Input, Output, clientside_callback, dcc
 import dash_ag_grid as dag
 import pandas as pd
 import plotly.express as px
 from dash_iconify import DashIconify
 
-# Inicializa o dashboard app
+# 2. Inicialização da aplicação
 app = Dash()
 
-# Botao para trocar tema (light/dark)
+# 3. Botão para alternar tema (claro/escuro)
 botao_troca_tema = dmc.Switch(
     offLabel=DashIconify(icon="radix-icons:sun", width=15),
     onLabel=DashIconify(icon="radix-icons:moon", width=15),
@@ -704,19 +963,21 @@ botao_troca_tema = dmc.Switch(
     color="grey",
 )
 
-# Carrega o dataframe
+# 4. Carregamento dos dados
 dataframe = pd.read_csv("heart.csv")
 
-# Cria a tabela de dados
+# 5. Configuração da tabela interativa
 tabela = dag.AgGrid(
     rowData=dataframe.to_dict("records"),
     columnDefs=[{"field": i} for i in dataframe.columns],
     defaultColDef={"resizable": True, "sortable": True, "filter": True},
+    className="ag-theme-alpine",
 )
 
-# Define o layout principal da aplicacao
+# 6. Definição do layout principal
 layout = dmc.AppShell(
     [
+        # Cabeçalho com título e botão de tema
         dmc.AppShellHeader(
             dmc.Group(
                 [
@@ -729,57 +990,74 @@ layout = dmc.AppShell(
                 px="md",
             ),
         ),
+        # Área principal com grid de componentes
         dmc.AppShellMain(
             dmc.Grid(
                 children=[
+                    # Gráfico 1: Histograma de idades
                     dmc.GridCol(
-                        dmc.Card(
-                            children=[
-                                dmc.CardSection(dmc.Text("Distribuição das Idades", fw=500), withBorder=True, inheritPadding=True, py="xs"),
-                                dmc.CardSection(dcc.Graph(figure=px.histogram(dataframe, x="age", nbins=20))),
-                            ],
-                            withBorder=True, shadow="sm", radius="md",
-                        ),
+                        dmc.Card([
+                            dmc.CardSection(
+                                dmc.Text("Distribuição das Idades", fw=500),
+                                withBorder=True, inheritPadding=True, py="xs"
+                            ),
+                            dmc.CardSection(
+                                dcc.Graph(figure=px.histogram(dataframe, x="age", nbins=20))
+                            ),
+                        ], withBorder=True, shadow="sm", radius="md"),
                         span="auto",
                     ),
+                    # Gráfico 2: Distribuição por sexo
                     dmc.GridCol(
-                        dmc.Card(
-                            children=[
-                                dmc.CardSection(dmc.Text("Distribuição por Sexo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
-                                dmc.CardSection(dcc.Graph(figure=px.bar(dataframe["sex"].value_counts().rename_axis("sex").reset_index(name="count"), x="sex", y="count"))),
-                            ],
-                            withBorder=True, shadow="sm", radius="md",
-                        ),
+                        dmc.Card([
+                            dmc.CardSection(
+                                dmc.Text("Distribuição por Sexo", fw=500),
+                                withBorder=True, inheritPadding=True, py="xs"
+                            ),
+                            dmc.CardSection(
+                                dcc.Graph(figure=px.bar(
+                                    dataframe["sex"].value_counts().rename_axis("sex").reset_index(name="count"),
+                                    x="sex", y="count"
+                                ))
+                            ),
+                        ], withBorder=True, shadow="sm", radius="md"),
                         span="auto",
                     ),
+                    # Gráfico 3: Scatter plot
                     dmc.GridCol(
-                        dmc.Card(
-                            children=[
-                                dmc.CardSection(dmc.Text("Colesterol vs. Frequência Máxima", fw=500), withBorder=True, inheritPadding=True, py="xs"),
-                                dmc.CardSection(dcc.Graph(figure=px.scatter(dataframe, x="chol", y="thalach", color="target"))),
-                            ],
-                            withBorder=True, shadow="sm", radius="md",
-                        ),
+                        dmc.Card([
+                            dmc.CardSection(
+                                dmc.Text("Colesterol vs. Frequência Máxima", fw=500),
+                                withBorder=True, inheritPadding=True, py="xs"
+                            ),
+                            dmc.CardSection(
+                                dcc.Graph(figure=px.scatter(dataframe, x="chol", y="thalach", color="target"))
+                            ),
+                        ], withBorder=True, shadow="sm", radius="md"),
                         span="auto",
                     ),
+                    # Gráfico 4: Box plot
                     dmc.GridCol(
-                        dmc.Card(
-                            children=[
-                                dmc.CardSection(dmc.Text("Pressão Arterial por Classe Alvo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
-                                dmc.CardSection(dcc.Graph(figure=px.box(dataframe, x="target", y="trestbps"))),
-                            ],
-                            withBorder=True, shadow="sm", radius="md",
-                        ),
+                        dmc.Card([
+                            dmc.CardSection(
+                                dmc.Text("Pressão Arterial por Classe Alvo", fw=500),
+                                withBorder=True, inheritPadding=True, py="xs"
+                            ),
+                            dmc.CardSection(
+                                dcc.Graph(figure=px.box(dataframe, x="target", y="trestbps"))
+                            ),
+                        ], withBorder=True, shadow="sm", radius="md"),
                         span="auto",
                     ),
+                    # Tabela de dados (largura completa)
                     dmc.GridCol(
-                        dmc.Card(
-                            children=[
-                                dmc.CardSection(dmc.Text("Tabela de Dados", fw=500), withBorder=True, inheritPadding=True, py="xs"),
-                                dmc.CardSection(tabela),
-                            ],
-                            withBorder=True, shadow="sm", radius="md",
-                        ),
+                        dmc.Card([
+                            dmc.CardSection(
+                                dmc.Text("Tabela de Dados", fw=500),
+                                withBorder=True, inheritPadding=True, py="xs"
+                            ),
+                            dmc.CardSection(tabela),
+                        ], withBorder=True, shadow="sm", radius="md"),
                         span=12,
                     ),
                 ],
@@ -792,13 +1070,17 @@ layout = dmc.AppShell(
     id="appshell",
 )
 
+# 7. Aplicação do layout com provider de temas
 app.layout = dmc.MantineProvider(layout)
 
-# Callback para trocar o tema
+# 8. Callback para alternar tema (executa no navegador)
 clientside_callback(
     """
     (switchOn) => {
-        document.documentElement.setAttribute('data-mantine-color-scheme', switchOn ? 'dark' : 'light');
+        document.documentElement.setAttribute(
+            'data-mantine-color-scheme',
+            switchOn ? 'dark' : 'light'
+        );
         return window.dash_clientside.no_update
     }
     """,
@@ -806,7 +1088,7 @@ clientside_callback(
     Input("color-scheme-switch", "checked"),
 )
 
-# Rotina de execucao do dashboard
+# 9. Execução do servidor de desenvolvimento
 if __name__ == "__main__":
     app.run(debug=True)`;
             }
