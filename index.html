@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Dashboards com Dash e Plotly</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Source Code Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js para Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <style>
+        /* Estilo base usando a fonte Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Fundo cinza claro */
+        }
+        /* Cor de destaque principal */
+        :root {
+            --primary-color: #2dd4bf; /* Verde-azulado */
+        }
+        .highlight-green {
+            color: var(--primary-color);
+        }
+        /* Estilo para o código */
+        .code-block, .terminal-code {
+            font-family: 'Source Code Pro', monospace;
+        }
+        /* Estilos para as abas ativas e inativas */
+        .tab.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        /* Estilo para o terminal simulado */
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #2d3748; /* gray-800 */
+        }
+        .terminal-body {
+            padding: 1.5rem;
+            background-color: #1a202c; /* gray-900 */
+        }
+        /* Ajustes para o tema do highlight.js */
+        .hljs {
+            background: #f9fafb; /* Cor de fundo do bloco de código claro */
+        }
+        /* Estilos para o modo escuro */
+        .dark body {
+            background-color: #111827; /* gray-900 */
+        }
+        .dark .dark\:bg-gray-800 {
+             background-color: #1f2937; /* gray-800 */
+        }
+        .dark .dark\:bg-gray-900 {
+             background-color: #111827; /* gray-900 */
+        }
+        .dark .dark\:text-white {
+            color: #fff;
+        }
+        .dark .dark\:text-gray-300 {
+            color: #d1d5db; /* gray-300 */
+        }
+        .dark .dark\:text-gray-400 {
+            color: #9ca3af; /* gray-400 */
+        }
+        .dark .dark\:border-gray-700 {
+            border-color: #374151; /* gray-700 */
+        }
+        .dark .dark\:bg-gray-700 {
+            background-color: #374151; /* gray-700 */
+        }
+        .dark .dark\:bg-gray-800\/80 {
+            background-color: rgba(31, 41, 55, 0.8);
+        }
+        .dark .dark\:hover\:text-teal-400:hover {
+            color: #2dd4bf;
+        }
+    </style>
+</head>
+<body class="text-gray-800 dark:text-gray-300">
+
+    <!-- Header -->
+    <header class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h12A2.25 2.25 0 0020.25 14.25V5.25A2.25 2.25 0 0018 3H6A2.25 2.25 0 003.75 3zM1.5 4.5h1.5m1.5 0h1.5m-1.5 4.5h1.5m1.5 0h1.5" />
+                </svg>
+                <span class="text-xl font-bold text-gray-800 dark:text-white">Guia Dash</span>
+            </div>
+            <div class="flex items-center">
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#objectives" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">Objetivos</a>
+                    <a href="#installation" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">Instalação</a>
+                    <a href="#tutorial" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">Tutorial</a>
+                </nav>
+                <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05A1 1 0 003.636 6.464l.707.707a1 1 0 001.414-1.414l-.707-.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1zm7.707 6.293a1 1 0 001.414 0l.707-.707a1 1 0 00-1.414-1.414l-.707.707a1 1 0 000 1.414zM4.343 15.657a1 1 0 011.414-1.414l.707.707a1 1 0 11-1.414 1.414l-.707-.707z"></path></svg>
+                </button>
+                <button class="md:hidden text-gray-700 dark:text-gray-400 ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="py-20 md:py-28 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+                    Guia Prático para Graduandos: <br class="hidden md:block">
+                    <span class="highlight-green">Dashboards Interativos com Dash e Plotly</span>
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    Um guia completo para criar visualizações de dados dinâmicas e impactantes utilizando Python.
+                </p>
+                <div class="mt-10">
+                    <a href="#tutorial" class="bg-teal-500 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-teal-600 transition-transform transform hover:scale-105 inline-block">
+                        Iniciar Tutorial
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objectives Section -->
+        <section id="objectives" class="py-20 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Objetivos da Cartilha</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
+                    Esta cartilha foi desenvolvida para guiar estudantes de graduação na jornada de criação de dashboards interativos. Nossos principais objetivos são:
+                </p>
+                <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-sm">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 text-teal-600 mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center">Introduzir Conceitos</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">Apresentar os conceitos fundamentais por trás da visualização de dados e a importância dos dashboards na análise de informações.</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-sm">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 text-teal-600 mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center">Ensinar Ferramentas</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">Capacitar os alunos com o conhecimento prático das bibliotecas Dash e Plotly para a construção de dashboards em Python.</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-sm">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 text-teal-600 mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center">Inspirar com Exemplos</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">Fornecer exemplos práticos e com código-fonte que sirvam como base e inspiração para projetos futuros dos estudantes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Installation Section -->
+        <section id="installation" class="py-20 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Instalação e Configuração</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
+                        Siga estes passos para configurar seu ambiente de desenvolvimento e executar seu primeiro dashboard.
+                    </p>
+                </div>
+                <div class="max-w-4xl mx-auto mt-12 space-y-12">
+                    <!-- Step 1: VS Code -->
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">1. Instale o Visual Studio Code</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">O VS Code é um editor de código-fonte leve, mas poderoso, que é executado em seu desktop e está disponível para Windows, macOS e Linux. Ele vem com suporte integrado para JavaScript, TypeScript e Node.js e tem um rico ecossistema de extensões para outras linguagens (como Python) e tempos de execução.</p>
+                    </div>
+
+                    <!-- Step 2: UV -->
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">2. Instale o `uv` (Gerenciador de Pacotes)</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">`uv` é um instalador e resolvedor de pacotes Python extremamente rápido, escrito em Rust. Ele é projetado como um substituto para `pip` e `pip-tools`. Para instalá-lo, siga as instruções no <a href="https://github.com/astral-sh/uv" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">site oficial</a>.</p>
+                    </div>
+
+                    <!-- Step 3: uv init -->
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">3. Inicialize seu Projeto</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Navegue até a pasta do seu projeto no terminal e execute o comando abaixo. Isso criará um ambiente virtual e o arquivo `pyproject.toml`, que gerencia as dependências do seu projeto.</p>
+                        <div class="mt-4 bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
+                            <div class="terminal-header">
+                                <div class="flex space-x-2">
+                                    <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                                    <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                                    <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                                </div>
+                                <span class="text-sm text-gray-400">bash</span>
+                                <button class="copy-btn text-gray-400 hover:text-white" data-copy-target="command-init" title="Copiar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <div class="terminal-body">
+                                <pre class="terminal-code text-gray-300 text-sm"><span class="text-green-400">$</span> <code id="command-init">uv init</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: uv add -->
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">4. Adicione as Dependências</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Agora, instale as bibliotecas Python necessárias para o nosso projeto. Este comando adicionará `dash`, `pandas` e outras bibliotecas úteis ao seu ambiente.</p>
+                         <div class="mt-4 bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
+                            <div class="terminal-header">
+                                <div class="flex space-x-2">
+                                    <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                                    <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                                    <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                                </div>
+                                <span class="text-sm text-gray-400">bash</span>
+                                <button class="copy-btn text-gray-400 hover:text-white" data-copy-target="command-add" title="Copiar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <div class="terminal-body">
+                                <pre class="terminal-code text-gray-300 text-sm whitespace-pre-wrap"><span class="text-green-400">$</span> <code id="command-add">uv add dash==3.1.1 dash-ag-grid==32.3.1 dash-iconify>=0.1.2 dash-mantine-components>=2.1.0 dash-player>=1.1.0 pandas>=2.3.1</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5: Initial App Code -->
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">5. Crie a Aplicação Mínima</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Crie um arquivo chamado `main.py` e adicione o código a seguir. Este é um aplicativo Dash interativo para garantir que nossa configuração está funcionando e para testar o hot-reload.</p>
+                        <div class="mt-4 rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py</span>
+                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-app-minimal" title="Copiar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <pre class="m-0"><code id="code-app-minimal" class="language-python p-4 block overflow-x-auto">from dash import Dash, html, dcc, callback, Output, Input
+import plotly.express as px
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder_unfiltered.csv')
+
+app = Dash()
+
+app.layout = [
+    html.H1(children='Title of Dash App', style={'textAlign':'center'}),
+    dcc.Dropdown(df.country.unique(), 'Canada', id='dropdown-selection'),
+    dcc.Graph(id='graph-content')
+]
+
+@callback(
+    Output('graph-content', 'figure'),
+    Input('dropdown-selection', 'value')
+)
+def update_graph(value):
+    dff = df[df.country==value]
+    return px.line(dff, x='year', y='pop')
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: uv run -->
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">6. Execute e Teste o Hot-Reload</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Execute o aplicativo. A opção `debug=True` ativa o "Hot Reload", que recarrega o servidor automaticamente sempre que você salva uma alteração no código.</p>
+                         <div class="mt-4 bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
+                            <div class="terminal-header">
+                                <div class="flex space-x-2">
+                                    <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+                                    <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                                    <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                                </div>
+                                <span class="text-sm text-gray-400">bash</span>
+                                <button class="copy-btn text-gray-400 hover:text-white" data-copy-target="command-run" title="Copiar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <div class="terminal-body">
+                                <pre class="terminal-code text-gray-300 text-sm"><span class="text-green-400">$</span> <code id="command-run">uv run python main.py</code></pre>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-r-lg">
+                            <p><span class="font-bold">Atenção:</span> Se você salvar o arquivo com um erro de sintaxe, o servidor pode parar. Se isso acontecer, corrija o erro e execute o comando `uv run python main.py` novamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorial Section -->
+        <section id="tutorial" class="py-20 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Construindo o Dashboard: Passo a Passo</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
+                        Agora que o ambiente está configurado, vamos transformar nosso app mínimo em um dashboard completo para análise de dados de ecocardiogramas.
+                    </p>
+                </div>
+                <div class="space-y-24 mt-16">
+
+                    <!-- Step 1: Data Download -->
+                    <div class="flex flex-col md:flex-row items-center gap-12">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <img src="https://placehold.co/800x400/e2e8f0/334155?text=Kaggle+Dataset+Page" alt="Página do Kaggle" class="rounded-lg w-full h-auto">
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 1: Baixe o Conjunto de Dados</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">
+                                O primeiro passo é obter os dados.
+                                <br><br>
+                                1. Acesse o <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">Heart Disease Dataset</a> no Kaggle.
+                                <br>
+                                2. Baixe e extraia o arquivo `archive.zip`.
+                                <br>
+                                3. Mova o `heart.csv` para a pasta do seu projeto.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Imports and Initial Setup -->
+                    <div class="flex flex-col md:flex-row-reverse items-center gap-12 tab-container">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <div class="border-b border-gray-200 dark:border-gray-700">
+                                    <nav class="-mb-px flex space-x-6"><button class="tab active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="code-step2">Código</button></nav>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="tab-content" id="code-step2">
+                                        <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step2" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
+                                            </div>
+                                            <pre class="m-0"><code id="code-block-step2" class="language-python p-4 block overflow-x-auto">import dash_mantine_components as dmc
+from dash import Dash, Input, Output, clientside_callback, dcc
+import dash_ag_grid as dag
+import pandas as pd
+import plotly.express as px
+from dash_iconify import DashIconify
+
+app = Dash()
+dataframe = pd.read_csv("heart.csv")
+# ... (código do layout e callbacks virão aqui)
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 2: Imports e Leitura dos Dados</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Apague o código mínimo e comece de novo com as importações corretas para o projeto final. Carregue o arquivo `heart.csv` que você baixou.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Building the Layout -->
+                    <div class="flex flex-col md:flex-row items-center gap-12 tab-container">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <div class="border-b border-gray-200 dark:border-gray-700">
+                                    <nav class="-mb-px flex space-x-6">
+                                        <button class="tab active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="code-step3">Código</button>
+                                        <button class="tab whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-gray-500" data-tab="result-step3">Resultado Parcial</button>
+                                    </nav>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="tab-content" id="code-step3">
+                                        <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (layout)</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step3" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
+                                            </div>
+                                            <pre class="m-0"><code id="code-block-step3" class="language-python p-4 block overflow-x-auto">layout = dmc.AppShell(
+    [
+        dmc.AppShellHeader(
+            dmc.Group(
+                [
+                    dmc.Title("Dashboard Ecocardiograma", order=1, c="blue"),
+                    # O botão do tema virá depois
+                ],
+                justify="space-between",
+                style={"flex": 1}, h="100%", px="md",
+            ),
+        ),
+        dmc.AppShellMain(
+            # O conteúdo do grid virá depois
+        ),
+    ],
+    header={"height": 60}, padding="md",
+)
+
+app.layout = dmc.MantineProvider(layout)</code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content hidden" id="result-step3">
+                                        <img src="https://placehold.co/800x200/e2e8f0/334155?text=Resultado:+App+com+Cabeçalho" alt="App com Cabeçalho" class="rounded-lg w-full h-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 3: Estrutura do Layout</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Usamos o `AppShell` do Dash Mantine Components para criar uma estrutura de página moderna. Neste passo, definimos apenas o cabeçalho (`AppShellHeader`) com o título do nosso dashboard.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Add Graphs -->
+                    <div class="flex flex-col md:flex-row-reverse items-center gap-12 tab-container">
+                        <div class="w-full md:w-3/5 lg:w-2/3">
+                            <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                                <div class="border-b border-gray-200 dark:border-gray-700">
+                                    <nav class="-mb-px flex space-x-6">
+                                        <button class="tab active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="code-step4">Código</button>
+                                        <button class="tab whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-gray-500" data-tab="result-step4">Resultado Parcial</button>
+                                    </nav>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="tab-content" id="code-step4">
+                                        <div class="rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (Grid)</span>
+                                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-block-step4" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
+                                            </div>
+                                            <pre class="m-0"><code id="code-block-step4" class="language-python p-4 block overflow-x-auto"># Dentro do dmc.AppShellMain:
+dmc.Grid(
+    children=[
+        dmc.GridCol(
+            dmc.Card(
+                children=[
+                    dmc.CardSection(dmc.Text("Distribuição das Idades", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                    dmc.CardSection(dcc.Graph(figure=px.histogram(dataframe, x="age", nbins=20))),
+                ],
+                withBorder=True, shadow="sm", radius="md",
+            ),
+            span="auto",
+        ),
+        dmc.GridCol(
+            dmc.Card(
+                children=[
+                    dmc.CardSection(dmc.Text("Distribuição por Sexo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                    dmc.CardSection(dcc.Graph(figure=px.bar(dataframe["sex"].value_counts().rename_axis("sex").reset_index(name="count"), x="sex", y="count"))),
+                ],
+                withBorder=True, shadow="sm", radius="md",
+            ),
+            span="auto",
+        ),
+        # ... outros gráficos seguem o mesmo padrão ...
+    ],
+    gutter="xs",
+)</code></pre>
+                                        </div>
+                                    </div>
+                                     <div class="tab-content hidden" id="result-step4">
+                                        <img src="https://placehold.co/800x600/e2e8f0/334155?text=Resultado:+Gráficos+Adicionados" alt="App com Gráficos" class="rounded-lg w-full h-auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 4: Adicionando os Gráficos</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400">Dentro do `AppShellMain`, usamos um `dmc.Grid` para organizar nossos gráficos. Cada gráfico é colocado dentro de um `dmc.Card` para um visual limpo. Usamos `dcc.Graph` para exibir as figuras criadas com o Plotly Express (`px.histogram`, `px.bar`, etc.).</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5: Final Code -->
+                    <div>
+                         <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">Passo 5: Resultado Final Interativo</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Após adicionar todos os gráficos, a tabela de dados e a interatividade do botão de tema, este é o resultado final. Interaja com o dashboard abaixo para ver o produto completo do nosso tutorial.</p>
+                        <div class="mt-4">
+                            <iframe src="https://py.cafe/embed/joaosnet/ecg-analysis-dash?pycafe-theme=light&pycafe-link-to-app=false" width="100%" height="400px" style="border: 1px solid #e6e6e6; border-radius: 8px;"></iframe>
+                        </div>
+                        <p class="mt-8 text-gray-600 dark:text-gray-400 leading-relaxed">Para referência, aqui está o código completo que gera o dashboard acima:</p>
+                        <div class="mt-4 rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                            <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py (final)</span>
+                                <button class="copy-btn text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" data-copy-target="code-final-full" title="Copiar"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></button>
+                            </div>
+                            <pre class="m-0"><code id="code-final-full" class="language-python p-4 block overflow-x-auto">{/* Código final completo será inserido aqui pelo script */}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-white uppercase tracking-wider">Agradecimentos</h3>
+                    <p class="mt-4">
+                        Um agradecimento especial ao <a href="https://laps.ufpa.br/" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">LaPS - Laboratório de Processamento de Sinais</a> da UFPA pelo apoio e ao professor Ronaldo de Freitas Zampolo pela orientação.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-white uppercase tracking-wider">Sobre o Autor</h3>
+                    <p class="mt-4">
+                        <strong>João Natividade Neto</strong><br>
+                        Graduando em Engenharia de Computação na Universidade Federal do Pará - UFPA.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 text-center">
+                <p>&copy; 2025 Guia Dash. Criado para fins educacionais.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="hidden fixed bottom-8 right-8 bg-teal-500 hover:bg-teal-600 text-white p-3 rounded-full shadow-lg transition-opacity duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+    
+    <script>
+        // Espera o DOM estar completamente carregado antes de executar o script
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Função para configurar as abas
+            function setupTabs() {
+                const tabContainers = document.querySelectorAll('.tab-container');
+                tabContainers.forEach(container => {
+                    const tabs = container.querySelectorAll('.tab');
+                    tabs.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            const targetId = tab.dataset.tab;
+                            const parentContainer = tab.closest('.tab-container');
+                            const localTabs = parentContainer.querySelectorAll('.tab');
+                            const localTabContents = parentContainer.querySelectorAll('.tab-content');
+
+                            localTabs.forEach(t => {
+                                t.classList.remove('active');
+                                t.classList.remove('border-teal-500', 'text-teal-600');
+                                t.classList.add('border-transparent', 'text-gray-500');
+                            });
+                            tab.classList.add('active');
+                            tab.classList.add('border-teal-500', 'text-teal-600');
+                            tab.classList.remove('border-transparent', 'text-gray-500');
+
+                            localTabContents.forEach(content => {
+                                if (content.id === targetId) {
+                                    content.classList.remove('hidden');
+                                } else {
+                                    content.classList.add('hidden');
+                                }
+                            });
+                        });
+                    });
+                });
+            }
+
+            // Função para o botão de copiar
+            function setupCopyButtons() {
+                document.body.addEventListener('click', function(event) {
+                    if (event.target.closest('.copy-btn')) {
+                        const button = event.target.closest('.copy-btn');
+                        const targetId = button.dataset.copyTarget;
+                        const commandToCopy = document.getElementById(targetId);
+                        
+                        if (commandToCopy) {
+                            const commandText = commandToCopy.textContent || commandToCopy.innerText;
+                            const textArea = document.createElement('textarea');
+                            textArea.value = commandText;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            try {
+                                document.execCommand('copy');
+                                button.title = "Copiado!";
+                                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`;
+                            } catch (err) {
+                                console.error('Falha ao copiar texto: ', err);
+                                button.title = "Erro ao copiar";
+                            }
+                            document.body.removeChild(textArea);
+
+                            setTimeout(() => {
+                                button.title = "Copiar";
+                                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>`;
+                            }, 2000);
+                        }
+                    }
+                });
+            }
+
+            // Função para o botão "Voltar ao Topo"
+            function setupScrollToTopButton() {
+                const scrollToTopButton = document.getElementById('scroll-to-top');
+
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 200) {
+                        scrollToTopButton.classList.remove('hidden');
+                    } else {
+                        scrollToTopButton.classList.add('hidden');
+                    }
+                });
+
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Função para o botão de tema
+            function setupThemeToggle() {
+                const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+                const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+                // Change the icons inside the button based on previous settings
+                if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    themeToggleLightIcon.classList.remove('hidden');
+                    document.documentElement.classList.add('dark');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    document.documentElement.classList.remove('dark');
+                }
+
+                const themeToggleBtn = document.getElementById('theme-toggle');
+
+                themeToggleBtn.addEventListener('click', function() {
+                    // toggle icons inside button
+                    themeToggleDarkIcon.classList.toggle('hidden');
+                    themeToggleLightIcon.classList.toggle('hidden');
+
+                    // if set via local storage previously
+                    if (localStorage.getItem('color-theme')) {
+                        if (localStorage.getItem('color-theme') === 'light') {
+                            document.documentElement.classList.add('dark');
+                            localStorage.setItem('color-theme', 'dark');
+                        } else {
+                            document.documentElement.classList.remove('dark');
+                            localStorage.setItem('color-theme', 'light');
+                        }
+
+                    // if NOT set via local storage previously
+                    } else {
+                        if (document.documentElement.classList.contains('dark')) {
+                            document.documentElement.classList.remove('dark');
+                            localStorage.setItem('color-theme', 'light');
+                        } else {
+                            document.documentElement.classList.add('dark');
+                            localStorage.setItem('color-theme', 'dark');
+                        }
+                    }
+                });
+            }
+            
+            const finalCodeBlock = document.getElementById('code-final-full');
+            if(finalCodeBlock) {
+                finalCodeBlock.textContent = `# Imports necessarios a implementacao
+import dash_mantine_components as dmc
+from dash import (
+    Dash,
+    Input,
+    Output,
+    clientside_callback,
+    dcc,
+)
+import dash_ag_grid as dag
+import pandas as pd
+import plotly.express as px
+from dash_iconify import DashIconify
+
+# Inicializa o dashboard app
+app = Dash()
+
+# Botao para trocar tema (light/dark)
+botao_troca_tema = dmc.Switch(
+    offLabel=DashIconify(icon="radix-icons:sun", width=15),
+    onLabel=DashIconify(icon="radix-icons:moon", width=15),
+    id="color-scheme-switch",
+    persistence=True,
+    color="grey",
+)
+
+# Carrega o dataframe
+dataframe = pd.read_csv("heart.csv")
+
+# Cria a tabela de dados
+tabela = dag.AgGrid(
+    rowData=dataframe.to_dict("records"),
+    columnDefs=[{"field": i} for i in dataframe.columns],
+    defaultColDef={"resizable": True, "sortable": True, "filter": True},
+)
+
+# Define o layout principal da aplicacao
+layout = dmc.AppShell(
+    [
+        dmc.AppShellHeader(
+            dmc.Group(
+                [
+                    dmc.Title("Dashboard Ecocardiograma", order=1, c="blue"),
+                    botao_troca_tema,
+                ],
+                justify="space-between",
+                style={"flex": 1},
+                h="100%",
+                px="md",
+            ),
+        ),
+        dmc.AppShellMain(
+            dmc.Grid(
+                children=[
+                    dmc.GridCol(
+                        dmc.Card(
+                            children=[
+                                dmc.CardSection(dmc.Text("Distribuição das Idades", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                                dmc.CardSection(dcc.Graph(figure=px.histogram(dataframe, x="age", nbins=20))),
+                            ],
+                            withBorder=True, shadow="sm", radius="md",
+                        ),
+                        span="auto",
+                    ),
+                    dmc.GridCol(
+                        dmc.Card(
+                            children=[
+                                dmc.CardSection(dmc.Text("Distribuição por Sexo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                                dmc.CardSection(dcc.Graph(figure=px.bar(dataframe["sex"].value_counts().rename_axis("sex").reset_index(name="count"), x="sex", y="count"))),
+                            ],
+                            withBorder=True, shadow="sm", radius="md",
+                        ),
+                        span="auto",
+                    ),
+                    dmc.GridCol(
+                        dmc.Card(
+                            children=[
+                                dmc.CardSection(dmc.Text("Colesterol vs. Frequência Máxima", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                                dmc.CardSection(dcc.Graph(figure=px.scatter(dataframe, x="chol", y="thalach", color="target"))),
+                            ],
+                            withBorder=True, shadow="sm", radius="md",
+                        ),
+                        span="auto",
+                    ),
+                    dmc.GridCol(
+                        dmc.Card(
+                            children=[
+                                dmc.CardSection(dmc.Text("Pressão Arterial por Classe Alvo", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                                dmc.CardSection(dcc.Graph(figure=px.box(dataframe, x="target", y="trestbps"))),
+                            ],
+                            withBorder=True, shadow="sm", radius="md",
+                        ),
+                        span="auto",
+                    ),
+                    dmc.GridCol(
+                        dmc.Card(
+                            children=[
+                                dmc.CardSection(dmc.Text("Tabela de Dados", fw=500), withBorder=True, inheritPadding=True, py="xs"),
+                                dmc.CardSection(tabela),
+                            ],
+                            withBorder=True, shadow="sm", radius="md",
+                        ),
+                        span=12,
+                    ),
+                ],
+                gutter="xs",
+            ),
+        ),
+    ],
+    header={"height": 60},
+    padding="md",
+    id="appshell",
+)
+
+app.layout = dmc.MantineProvider(layout)
+
+# Callback para trocar o tema
+clientside_callback(
+    """
+    (switchOn) => {
+        document.documentElement.setAttribute('data-mantine-color-scheme', switchOn ? 'dark' : 'light');
+        return window.dash_clientside.no_update
+    }
+    """,
+    Output("color-scheme-switch", "id"),
+    Input("color-scheme-switch", "checked"),
+)
+
+# Rotina de execucao do dashboard
+if __name__ == "__main__":
+    app.run(debug=True)`;
+            }
+
+            // Executa as funções de configuração
+            setupTabs();
+            setupCopyButtons();
+            setupScrollToTopButton();
+            setupThemeToggle();
+
+            // Aplica highlight em todos os blocos de código Python
+            document.querySelectorAll('code.language-python').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+</body>
+</html>
