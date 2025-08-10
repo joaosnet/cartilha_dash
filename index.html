@@ -834,22 +834,11 @@ clientside_callback(
         }
 
         function applyTranslation(lang) {
-            console.log("applyTranslation chamada para:", lang);
-            console.log("langJson disponível:", !!langJson);
-            
-            if (!langJson) {
-                console.error("langJson não está disponível");
-                return;
-            }
+            if (!langJson) return;
             
             // Traduz todos os elementos com data-translate
-            const elementsToTranslate = document.querySelectorAll("[data-translate]");
-            console.log("Elementos encontrados com data-translate:", elementsToTranslate.length);
-            
-            elementsToTranslate.forEach((element, index) => {
+            document.querySelectorAll("[data-translate]").forEach(element => {
                 const keys = element.dataset.translate.split(".");
-                console.log(`Elemento ${index}: chave='${element.dataset.translate}', texto original='${element.textContent}'`);
-                
                 let translation = langJson[lang];
                 keys.forEach(k => {
                     if (k.match(/^\d+$/)) {
@@ -860,21 +849,14 @@ clientside_callback(
                     }
                 });
 
-                console.log(`Tradução encontrada: '${translation}'`);
-                
                 if (translation) {
                     element.textContent = translation;
-                    console.log(`Texto atualizado para: '${element.textContent}'`);
-                } else {
-                    console.warn(`Tradução não encontrada para: ${element.dataset.translate}`);
                 }
             });
             
             // Atualiza os botões de idioma
             document.querySelectorAll(".translate").forEach(btn => btn.classList.remove("active"));
             const activeBtn = document.querySelector(`.translate#${lang}`);
-            console.log("Botão ativo encontrado:", !!activeBtn);
-            
             if (activeBtn) {
                 activeBtn.classList.add("active");
                 // Remove classes de botão inativo
@@ -893,7 +875,6 @@ clientside_callback(
             
             toggleVLibras(lang);
             localStorage.setItem("selected-language", lang);
-            console.log("Tradução aplicada com sucesso para:", lang);
         }
 
         // Espera o DOM estar completamente carregado antes de executar o script
@@ -901,22 +882,14 @@ clientside_callback(
             
             // Inicializa o sistema de tradução
             const savedLang = localStorage.getItem("selected-language") || detectBrowserLanguage();
-            console.log("Idioma detectado:", savedLang);
-            
             $.getJSON("assets/js/lang.json", function (json) {
-                console.log("Arquivo de tradução carregado:", json);
                 langJson = json;
                 applyTranslation(savedLang);
-                
-                // Event listener para os botões de tradução
                 $(".translate").on("click", function () {
-                    console.log("Botão clicado:", this.id);
                     applyTranslation(this.id);
                 });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                console.error("Erro ao carregar o arquivo de tradução:", textStatus, errorThrown);
-                console.log("Status:", jqXHR.status);
-                console.log("Response:", jqXHR.responseText);
+            }).fail(function() {
+                console.error("Erro ao carregar o arquivo de tradução");
             });
 
             // Função para configurar as abas
