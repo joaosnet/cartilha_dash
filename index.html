@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    
+    <!-- jQuery para o sistema de tradução -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <style>
         /* Estilo base usando a fonte Inter */
@@ -99,14 +102,22 @@
                 <svg class="w-8 h-8 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h12A2.25 2.25 0 0020.25 14.25V5.25A2.25 2.25 0 0018 3H6A2.25 2.25 0 003.75 3zM1.5 4.5h1.5m1.5 0h1.5m-1.5 4.5h1.5m1.5 0h1.5" />
                 </svg>
-                <span class="text-xl font-bold text-gray-800 dark:text-white">Guia Dash</span>
+                <span class="text-xl font-bold text-gray-800 dark:text-white" data-translate="navbar.title">Guia Dash</span>
             </div>
             <div class="flex items-center">
                 <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#objectives" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">Objetivos</a>
-                    <a href="#installation" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">Instalação</a>
-                    <a href="#tutorial" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">Tutorial</a>
+                    <a href="#objectives" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors" data-translate="navbar.objectives">Objetivos</a>
+                    <a href="#installation" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors" data-translate="navbar.installation">Instalação</a>
+                    <a href="#tutorial" class="text-gray-600 dark:text-gray-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors" data-translate="navbar.tutorial">Tutorial</a>
                 </nav>
+                
+                <!-- Botões de idioma -->
+                <div class="ml-4 flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+                    <button id="pt" class="translate active px-2 py-1 text-xs font-medium rounded transition-colors bg-teal-500 text-white" title="Português">PT</button>
+                    <button id="en" class="translate px-2 py-1 text-xs font-medium rounded transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" title="English">EN</button>
+                    <button id="de" class="translate px-2 py-1 text-xs font-medium rounded transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" title="Deutsch">DE</button>
+                </div>
+                
                 <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
                     <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                     <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05A1 1 0 003.636 6.464l.707.707a1 1 0 001.414-1.414l-.707-.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1zm7.707 6.293a1 1 0 001.414 0l.707-.707a1 1 0 00-1.414-1.414l-.707.707a1 1 0 000 1.414zM4.343 15.657a1 1 0 011.414-1.414l.707.707a1 1 0 11-1.414 1.414l-.707-.707z"></path></svg>
@@ -126,14 +137,14 @@
         <section class="py-20 md:py-28 text-center">
             <div class="container mx-auto px-6">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                    Guia Prático para Graduandos: <br class="hidden md:block">
-                    <span class="highlight-green">Dashboards Interativos com Dash e Plotly</span>
+                    <span data-translate="hero.title">Guia Prático para Graduandos:</span> <br class="hidden md:block">
+                    <span class="highlight-green" data-translate="hero.subtitle">Dashboards Interativos com Dash e Plotly</span>
                 </h1>
-                <p class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                <p class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto" data-translate="hero.description">
                     Um guia completo para criar visualizações de dados dinâmicas e impactantes utilizando Python.
                 </p>
                 <div class="mt-10">
-                    <a href="#tutorial" class="bg-teal-500 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-teal-600 transition-transform transform hover:scale-105 inline-block">
+                    <a href="#tutorial" class="bg-teal-500 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-teal-600 transition-transform transform hover:scale-105 inline-block" data-translate="hero.start_button">
                         Iniciar Tutorial
                     </a>
                 </div>
@@ -143,8 +154,8 @@
         <!-- Objectives Section -->
         <section id="objectives" class="py-20 bg-gray-50 dark:bg-gray-800">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Objetivos da Cartilha</h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4" data-translate="objectives.title">Objetivos da Cartilha</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto" data-translate="objectives.description">
                     Esta cartilha foi desenvolvida para guiar estudantes de graduação na jornada de criação de dashboards interativos. Nossos principais objetivos são:
                 </p>
                 <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
@@ -154,8 +165,8 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center">Introduzir Conceitos</h3>
-                        <p class="mt-2 text-gray-600 dark:text-gray-400">Apresentar os conceitos fundamentais por trás da visualização de dados e a importância dos dashboards na análise de informações.</p>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center" data-translate="objectives.card1_title">Introduzir Conceitos</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400" data-translate="objectives.card1_description">Apresentar os conceitos fundamentais por trás da visualização de dados e a importância dos dashboards na análise de informações.</p>
                     </div>
                     <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-sm">
                         <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 text-teal-600 mx-auto mb-6">
@@ -163,8 +174,8 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center">Ensinar Ferramentas</h3>
-                        <p class="mt-2 text-gray-600 dark:text-gray-400">Capacitar os alunos com o conhecimento prático das bibliotecas Dash e Plotly para a construção de dashboards em Python.</p>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center" data-translate="objectives.card2_title">Ensinar Ferramentas</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400" data-translate="objectives.card2_description">Capacitar os alunos com o conhecimento prático das bibliotecas Dash e Plotly para a construção de dashboards em Python.</p>
                     </div>
                     <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-sm">
                         <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 text-teal-600 mx-auto mb-6">
@@ -172,8 +183,8 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                             </svg>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center">Inspirar com Exemplos</h3>
-                        <p class="mt-2 text-gray-600 dark:text-gray-400">Fornecer exemplos práticos e com código-fonte que sirvam como base e inspiração para projetos futuros dos estudantes.</p>
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white text-center" data-translate="objectives.card3_title">Inspirar com Exemplos</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400" data-translate="objectives.card3_description">Fornecer exemplos práticos e com código-fonte que sirvam como base e inspiração para projetos futuros dos estudantes.</p>
                     </div>
                 </div>
             </div>
@@ -183,28 +194,28 @@
         <section id="installation" class="py-20 bg-white dark:bg-gray-900">
             <div class="container mx-auto px-6">
                 <div class="text-center">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Instalação e Configuração</h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4" data-translate="installation.title">Instalação e Configuração</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto" data-translate="installation.description">
                         Siga estes passos para configurar seu ambiente de desenvolvimento e executar seu primeiro dashboard.
                     </p>
                 </div>
                 <div class="max-w-4xl mx-auto mt-12 space-y-12">
                     <!-- Step 1: VS Code -->
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">1. Instale o Visual Studio Code</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">O VS Code é um editor de código-fonte leve, mas poderoso, que é executado em seu desktop e está disponível para Windows, macOS e Linux. Ele vem com suporte integrado para JavaScript, TypeScript e Node.js e tem um rico ecossistema de extensões para outras linguagens (como Python) e tempos de execução.</p>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" data-translate="installation.step1_title">1. Instale o Visual Studio Code</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-translate="installation.step1_description">O VS Code é um editor de código-fonte leve, mas poderoso, que é executado em seu desktop e está disponível para Windows, macOS e Linux. Ele vem com suporte integrado para JavaScript, TypeScript e Node.js e tem um rico ecossistema de extensões para outras linguagens (como Python) e tempos de execução.</p>
                     </div>
 
                     <!-- Step 2: UV -->
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">2. Instale o `uv` (Gerenciador de Pacotes)</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">`uv` é um instalador e resolvedor de pacotes Python extremamente rápido, escrito em Rust. Ele é projetado como um substituto para `pip` e `pip-tools`. Para instalá-lo, siga as instruções no <a href="https://github.com/astral-sh/uv" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">site oficial</a>.</p>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" data-translate="installation.step2_title">2. Instale o `uv` (Gerenciador de Pacotes)</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed"><span data-translate="installation.step2_description">`uv` é um instalador e resolvedor de pacotes Python extremamente rápido, escrito em Rust. Ele é projetado como um substituto para `pip` e `pip-tools`. Para instalá-lo, siga as instruções no</span> <a href="https://github.com/astral-sh/uv" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">site oficial</a>.</p>
                     </div>
 
                     <!-- Step 3: uv init -->
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">3. Inicialize seu Projeto</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Navegue até a pasta do seu projeto no terminal e execute o comando abaixo. Isso criará um ambiente virtual e o arquivo `pyproject.toml`, que gerencia as dependências do seu projeto.</p>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" data-translate="installation.step3_title">3. Inicialize seu Projeto</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-translate="installation.step3_description">Navegue até a pasta do seu projeto no terminal e execute o comando abaixo. Isso criará um ambiente virtual e o arquivo `pyproject.toml`, que gerencia as dependências do seu projeto.</p>
                         <div class="mt-4 bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
                             <div class="terminal-header">
                                 <div class="flex space-x-2">
@@ -225,8 +236,8 @@
 
                     <!-- Step 4: uv add -->
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">4. Adicione as Dependências</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Agora, instale as bibliotecas Python necessárias para o nosso projeto. Este comando adicionará `dash`, `pandas` e outras bibliotecas úteis ao seu ambiente.</p>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" data-translate="installation.step4_title">4. Adicione as Dependências</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-translate="installation.step4_description">Agora, instale as bibliotecas Python necessárias para o nosso projeto. Este comando adicionará `dash`, `pandas` e outras bibliotecas úteis ao seu ambiente.</p>
                          <div class="mt-4 bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
                             <div class="terminal-header">
                                 <div class="flex space-x-2">
@@ -247,8 +258,8 @@
                     
                     <!-- Step 5: Initial App Code -->
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">5. Crie a Aplicação Mínima</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Crie um arquivo chamado `main.py` e adicione o código a seguir. Este é um aplicativo Dash interativo para garantir que nossa configuração está funcionando e para testar o hot-reload.</p>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" data-translate="installation.step5_title">5. Crie a Aplicação Mínima</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-translate="installation.step5_description">Crie um arquivo chamado `main.py` e adicione o código a seguir. Este é um aplicativo Dash interativo para garantir que nossa configuração está funcionando e para testar o hot-reload.</p>
                         <div class="mt-4 rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
                             <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                                 <span class="text-sm font-mono text-gray-600 dark:text-gray-400">main.py</span>
@@ -285,8 +296,8 @@ if __name__ == '__main__':
 
                     <!-- Step 6: uv run -->
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">6. Execute e Teste o Hot-Reload</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Execute o aplicativo. A opção `debug=True` ativa o "Hot Reload", que recarrega o servidor automaticamente sempre que você salva uma alteração no código.</p>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" data-translate="installation.step6_title">6. Execute e Teste o Hot-Reload</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-translate="installation.step6_description">Execute o aplicativo. A opção `debug=True` ativa o "Hot Reload", que recarrega o servidor automaticamente sempre que você salva uma alteração no código.</p>
                          <div class="mt-4 bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
                             <div class="terminal-header">
                                 <div class="flex space-x-2">
@@ -304,7 +315,7 @@ if __name__ == '__main__':
                             </div>
                         </div>
                         <div class="mt-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-r-lg">
-                            <p><span class="font-bold">Atenção:</span> Se você salvar o arquivo com um erro de sintaxe, o servidor pode parar. Se isso acontecer, corrija o erro e execute o comando `uv run python main.py` novamente.</p>
+                            <p><span class="font-bold" data-translate="installation.warning">Atenção:</span> <span data-translate="installation.warning_text">Se você salvar o arquivo com um erro de sintaxe, o servidor pode parar. Se isso acontecer, corrija o erro e execute o comando `uv run python main.py` novamente.</span></p>
                         </div>
                     </div>
                 </div>
@@ -315,8 +326,8 @@ if __name__ == '__main__':
         <section id="tutorial" class="py-20 bg-gray-50 dark:bg-gray-800">
             <div class="container mx-auto px-6">
                 <div class="text-center">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Construindo o Dashboard: Passo a Passo</h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4" data-translate="tutorial.title">Construindo o Dashboard: Passo a Passo</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto" data-translate="tutorial.description">
                         Agora que o ambiente está configurado, vamos transformar nosso app mínimo em um dashboard completo para análise de dados de ecocardiogramas. Cada passo adiciona uma nova funcionalidade ao nosso projeto.
                     </p>
                 </div>
@@ -330,8 +341,8 @@ if __name__ == '__main__':
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 1: Baixe o Conjunto de Dados</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step1_title">Passo 1: Baixe o Conjunto de Dados</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step1_description">
                                 O primeiro passo é obter os dados.
                                 <br><br>
                                 1. Acesse o <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">Heart Disease Dataset</a> no Kaggle.
@@ -380,8 +391,8 @@ if __name__ == "__main__":
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 2: Imports e Leitura dos Dados</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Apague o código mínimo e comece com as importações específicas. Carregue o arquivo [`heart.csv`](heart.csv:1) que você baixou. Execute para verificar se não há erros de importação.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step2_title">Passo 2: Imports e Leitura dos Dados</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step2_description">Apague o código mínimo e comece com as importações específicas. Carregue o arquivo [`heart.csv`](heart.csv:1) que você baixou. Execute para verificar se não há erros de importação.</p>
                         </div>
                     </div>
 
@@ -437,8 +448,8 @@ app.layout = dmc.MantineProvider(layout)</code></pre>
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 3: Estrutura Básica do Layout</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Criamos a estrutura usando [`dmc.AppShell()`](main.py:1) com cabeçalho ([`AppShellHeader`](main.py:1)) e área principal ([`AppShellMain`](main.py:1)). O [`MantineProvider`](main.py:1) fornece temas consistentes.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step3_title">Passo 3: Estrutura Básica do Layout</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step3_description">Criamos a estrutura usando [`dmc.AppShell()`](main.py:1) com cabeçalho ([`AppShellHeader`](main.py:1)) e área principal ([`AppShellMain`](main.py:1)). O [`MantineProvider`](main.py:1) fornece temas consistentes.</p>
                         </div>
                     </div>
 
@@ -498,8 +509,8 @@ dmc.AppShellMain(
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 4: Primeiro Gráfico</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Adicionamos nosso primeiro gráfico usando [`px.histogram()`](main.py:1) dentro de um [`dmc.Card()`](main.py:1). O card possui seções para título e conteúdo, criando uma apresentação organizada.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step4_title">Passo 4: Primeiro Gráfico</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step4_description">Adicionamos nosso primeiro gráfico usando [`px.histogram()`](main.py:1) dentro de um [`dmc.Card()`](main.py:1). O card possui seções para título e conteúdo, criando uma apresentação organizada.</p>
                         </div>
                     </div>
 
@@ -572,8 +583,8 @@ dmc.AppShellMain(
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 5: Sistema de Grid com Múltiplos Gráficos</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Implementamos um sistema de grid usando [`dmc.Grid()`](main.py:1) e [`dmc.GridCol()`](main.py:1) para organizar quatro tipos diferentes de gráficos: histograma, barra, scatter e box plot.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step5_title">Passo 5: Sistema de Grid com Múltiplos Gráficos</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step5_description">Implementamos um sistema de grid usando [`dmc.Grid()`](main.py:1) e [`dmc.GridCol()`](main.py:1) para organizar quatro tipos diferentes de gráficos: histograma, barra, scatter e box plot.</p>
                         </div>
                     </div>
 
@@ -627,8 +638,8 @@ tabela = dag.AgGrid(
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 6: Tabela de Dados Interativa</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Adicionamos uma tabela interativa usando [`dag.AgGrid()`](main.py:1) que permite ordenação, filtro e redimensionamento de colunas. A tabela ocupa a largura total com [`span=12`](main.py:1).</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step6_title">Passo 6: Tabela de Dados Interativa</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step6_description">Adicionamos uma tabela interativa usando [`dag.AgGrid()`](main.py:1) que permite ordenação, filtro e redimensionamento de colunas. A tabela ocupa a largura total com [`span=12`](main.py:1).</p>
                         </div>
                     </div>
 
@@ -682,8 +693,8 @@ botao_troca_tema = dmc.Switch(
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 7: Botão de Alternância de Tema</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Adicionamos um [`dmc.Switch()`](main.py:1) com ícones do [`DashIconify`](main.py:1) para alternar entre temas claro e escuro. O [`persistence=True`](main.py:1) mantém a preferência do usuário.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step7_title">Passo 7: Botão de Alternância de Tema</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step7_description">Adicionamos um [`dmc.Switch()`](main.py:1) com ícones do [`DashIconify`](main.py:1) para alternar entre temas claro e escuro. O [`persistence=True`](main.py:1) mantém a preferência do usuário.</p>
                         </div>
                     </div>
 
@@ -733,26 +744,26 @@ clientside_callback(
                             </div>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Passo 8: Callbacks e Interatividade</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400">Implementamos um [`clientside_callback()`](main.py:1) que executa JavaScript no navegador para alternar o tema instantaneamente, sem precisar comunicar com o servidor Python.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step8_title">Passo 8: Callbacks e Interatividade</h3>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step8_description">Implementamos um [`clientside_callback()`](main.py:1) que executa JavaScript no navegador para alternar o tema instantaneamente, sem precisar comunicar com o servidor Python.</p>
                         </div>
                     </div>
                     
                     <!-- Step 9: Final Result -->
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3">Passo 9: Dashboard Completo e Interativo</h3>
-                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Parabéns! Você construiu um dashboard completo seguindo uma abordagem incremental. Cada passo adicionou uma funcionalidade específica, permitindo compreender como cada elemento contribui para o resultado final.</p>
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-3" data-translate="tutorial.step9_title">Passo 9: Dashboard Completo e Interativo</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-translate="tutorial.step9_description">Parabéns! Você construiu um dashboard completo seguindo uma abordagem incremental. Cada passo adicionou uma funcionalidade específica, permitindo compreender como cada elemento contribui para o resultado final.</p>
                         
                         <div class="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-                            <h4 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">📚 Conceitos Aprendidos:</h4>
+                            <h4 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3" data-translate="tutorial.concepts_title">📚 Conceitos Aprendidos:</h4>
                             <ul class="space-y-2 text-blue-800 dark:text-blue-200">
-                                <li>• <strong>Importações organizadas:</strong> Como estruturar as dependências do projeto</li>
-                                <li>• <strong>Layout responsivo:</strong> Uso do AppShell e sistema de Grid</li>
-                                <li>• <strong>Componentes visuais:</strong> Cards, seções e elementos de UI</li>
-                                <li>• <strong>Visualizações de dados:</strong> Diferentes tipos de gráficos com Plotly</li>
-                                <li>• <strong>Tabelas interativas:</strong> AG-Grid com funcionalidades avançadas</li>
-                                <li>• <strong>Temas dinâmicos:</strong> Sistema de alternância claro/escuro</li>
-                                <li>• <strong>Callbacks:</strong> Interatividade client-side e server-side</li>
+                                <li data-translate="tutorial.concepts.0">• <strong>Importações organizadas:</strong> Como estruturar as dependências do projeto</li>
+                                <li data-translate="tutorial.concepts.1">• <strong>Layout responsivo:</strong> Uso do AppShell e sistema de Grid</li>
+                                <li data-translate="tutorial.concepts.2">• <strong>Componentes visuais:</strong> Cards, seções e elementos de UI</li>
+                                <li data-translate="tutorial.concepts.3">• <strong>Visualizações de dados:</strong> Diferentes tipos de gráficos com Plotly</li>
+                                <li data-translate="tutorial.concepts.4">• <strong>Tabelas interativas:</strong> AG-Grid com funcionalidades avançadas</li>
+                                <li data-translate="tutorial.concepts.5">• <strong>Temas dinâmicos:</strong> Sistema de alternância claro/escuro</li>
+                                <li data-translate="tutorial.concepts.6">• <strong>Callbacks:</strong> Interatividade client-side e server-side</li>
                             </ul>
                         </div>
                         
@@ -779,21 +790,21 @@ clientside_callback(
         <div class="container mx-auto px-6 py-12">
             <div class="grid md:grid-cols-2 gap-8">
                 <div>
-                    <h3 class="font-semibold text-gray-800 dark:text-white uppercase tracking-wider">Agradecimentos</h3>
-                    <p class="mt-4">
+                    <h3 class="font-semibold text-gray-800 dark:text-white uppercase tracking-wider" data-translate="footer.acknowledgments">Agradecimentos</h3>
+                    <p class="mt-4" data-translate="footer.acknowledgments_text">
                         Um agradecimento especial ao <a href="https://laps.ufpa.br/" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">LaPS - Laboratório de Processamento de Sinais</a> da UFPA pelo apoio e ao professor Ronaldo de Freitas Zampolo pela orientação.
                     </p>
                 </div>
                 <div>
-                    <h3 class="font-semibold text-gray-800 dark:text-white uppercase tracking-wider">Sobre o Autor</h3>
+                    <h3 class="font-semibold text-gray-800 dark:text-white uppercase tracking-wider" data-translate="footer.about_author">Sobre o Autor</h3>
                     <p class="mt-4">
-                        <strong>João Natividade Neto</strong><br>
-                        Graduando em Engenharia de Computação na Universidade Federal do Pará - UFPA.
+                        <strong data-translate="footer.author_name">João Natividade Neto</strong><br>
+                        <span data-translate="footer.author_description">Graduando em Engenharia de Computação na Universidade Federal do Pará - UFPA.</span>
                     </p>
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 text-center">
-                <p>&copy; 2025 Guia Dash. Criado para fins educacionais.</p>
+                <p data-translate="footer.copyright">&copy; 2025 Guia Dash. Criado para fins educacionais.</p>
             </div>
         </div>
     </footer>
@@ -806,8 +817,107 @@ clientside_callback(
     </button>
     
     <script>
+        /*=============== TRADUÇÃO ===============*/
+        let langJson = null;
+
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.languages[0];
+            if (browserLang.startsWith('pt')) return 'pt';
+            if (browserLang.startsWith('en')) return 'en';
+            if (browserLang.startsWith('de')) return 'de';
+            return 'pt'; // padrão
+        }
+
+        function toggleVLibras(lang) {
+            // Função para controlar VLibras se necessário no futuro
+            // Por enquanto não implementada
+        }
+
+        function applyTranslation(lang) {
+            console.log("applyTranslation chamada para:", lang);
+            console.log("langJson disponível:", !!langJson);
+            
+            if (!langJson) {
+                console.error("langJson não está disponível");
+                return;
+            }
+            
+            // Traduz todos os elementos com data-translate
+            const elementsToTranslate = document.querySelectorAll("[data-translate]");
+            console.log("Elementos encontrados com data-translate:", elementsToTranslate.length);
+            
+            elementsToTranslate.forEach((element, index) => {
+                const keys = element.dataset.translate.split(".");
+                console.log(`Elemento ${index}: chave='${element.dataset.translate}', texto original='${element.textContent}'`);
+                
+                let translation = langJson[lang];
+                keys.forEach(k => {
+                    if (k.match(/^\d+$/)) {
+                        // Se a chave é um número (para arrays)
+                        translation = translation?.[parseInt(k)];
+                    } else {
+                        translation = translation?.[k];
+                    }
+                });
+
+                console.log(`Tradução encontrada: '${translation}'`);
+                
+                if (translation) {
+                    element.textContent = translation;
+                    console.log(`Texto atualizado para: '${element.textContent}'`);
+                } else {
+                    console.warn(`Tradução não encontrada para: ${element.dataset.translate}`);
+                }
+            });
+            
+            // Atualiza os botões de idioma
+            document.querySelectorAll(".translate").forEach(btn => btn.classList.remove("active"));
+            const activeBtn = document.querySelector(`.translate#${lang}`);
+            console.log("Botão ativo encontrado:", !!activeBtn);
+            
+            if (activeBtn) {
+                activeBtn.classList.add("active");
+                // Remove classes de botão inativo
+                activeBtn.classList.remove("text-gray-600", "dark:text-gray-300", "hover:bg-gray-200", "dark:hover:bg-gray-600");
+                // Adiciona classes de botão ativo
+                activeBtn.classList.add("bg-teal-500", "text-white");
+            }
+            
+            // Atualiza outros botões para o estado inativo
+            document.querySelectorAll(".translate").forEach(btn => {
+                if (btn.id !== lang) {
+                    btn.classList.remove("active", "bg-teal-500", "text-white");
+                    btn.classList.add("text-gray-600", "dark:text-gray-300", "hover:bg-gray-200", "dark:hover:bg-gray-600");
+                }
+            });
+            
+            toggleVLibras(lang);
+            localStorage.setItem("selected-language", lang);
+            console.log("Tradução aplicada com sucesso para:", lang);
+        }
+
         // Espera o DOM estar completamente carregado antes de executar o script
         document.addEventListener('DOMContentLoaded', function() {
+            
+            // Inicializa o sistema de tradução
+            const savedLang = localStorage.getItem("selected-language") || detectBrowserLanguage();
+            console.log("Idioma detectado:", savedLang);
+            
+            $.getJSON("assets/js/lang.json", function (json) {
+                console.log("Arquivo de tradução carregado:", json);
+                langJson = json;
+                applyTranslation(savedLang);
+                
+                // Event listener para os botões de tradução
+                $(".translate").on("click", function () {
+                    console.log("Botão clicado:", this.id);
+                    applyTranslation(this.id);
+                });
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.error("Erro ao carregar o arquivo de tradução:", textStatus, errorThrown);
+                console.log("Status:", jqXHR.status);
+                console.log("Response:", jqXHR.responseText);
+            });
 
             // Função para configurar as abas
             function setupTabs() {

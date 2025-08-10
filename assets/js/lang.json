@@ -1,0 +1,254 @@
+{
+  "pt": {
+    "navbar": {
+      "title": "Guia Dash",
+      "objectives": "Objetivos",
+      "installation": "Instalação",
+      "tutorial": "Tutorial",
+      "theme_dark": "Tema Escuro",
+      "theme_light": "Tema Claro"
+    },
+    "hero": {
+      "title": "Guia Prático para Graduandos:",
+      "subtitle": "Dashboards Interativos com Dash e Plotly",
+      "description": "Um guia completo para criar visualizações de dados dinâmicas e impactantes utilizando Python.",
+      "start_button": "Iniciar Tutorial"
+    },
+    "objectives": {
+      "title": "Objetivos da Cartilha",
+      "description": "Esta cartilha foi desenvolvida para guiar estudantes de graduação na jornada de criação de dashboards interativos. Nossos principais objetivos são:",
+      "card1_title": "Introduzir Conceitos",
+      "card1_description": "Apresentar os conceitos fundamentais por trás da visualização de dados e a importância dos dashboards na análise de informações.",
+      "card2_title": "Ensinar Ferramentas",
+      "card2_description": "Capacitar os alunos com o conhecimento prático das bibliotecas Dash e Plotly para a construção de dashboards em Python.",
+      "card3_title": "Inspirar com Exemplos",
+      "card3_description": "Fornecer exemplos práticos e com código-fonte que sirvam como base e inspiração para projetos futuros dos estudantes."
+    },
+    "installation": {
+      "title": "Instalação e Configuração",
+      "description": "Siga estes passos para configurar seu ambiente de desenvolvimento e executar seu primeiro dashboard.",
+      "step1_title": "1. Instale o Visual Studio Code",
+      "step1_description": "O VS Code é um editor de código-fonte leve, mas poderoso, que é executado em seu desktop e está disponível para Windows, macOS e Linux. Ele vem com suporte integrado para JavaScript, TypeScript e Node.js e tem um rico ecossistema de extensões para outras linguagens (como Python) e tempos de execução.",
+      "step2_title": "2. Instale o `uv` (Gerenciador de Pacotes)",
+      "step2_description": "`uv` é um instalador e resolvedor de pacotes Python extremamente rápido, escrito em Rust. Ele é projetado como um substituto para `pip` e `pip-tools`. Para instalá-lo, siga as instruções no",
+      "step3_title": "3. Inicialize seu Projeto",
+      "step3_description": "Navegue até a pasta do seu projeto no terminal e execute o comando abaixo. Isso criará um ambiente virtual e o arquivo `pyproject.toml`, que gerencia as dependências do seu projeto.",
+      "step4_title": "4. Adicione as Dependências",
+      "step4_description": "Agora, instale as bibliotecas Python necessárias para o nosso projeto. Este comando adicionará `dash`, `pandas` e outras bibliotecas úteis ao seu ambiente.",
+      "step5_title": "5. Crie a Aplicação Mínima",
+      "step5_description": "Crie um arquivo chamado `main.py` e adicione o código a seguir. Este é um aplicativo Dash interativo para garantir que nossa configuração está funcionando e para testar o hot-reload.",
+      "step6_title": "6. Execute e Teste o Hot-Reload",
+      "step6_description": "Execute o aplicativo. A opção `debug=True` ativa o \"Hot Reload\", que recarrega o servidor automaticamente sempre que você salva uma alteração no código.",
+      "warning": "Atenção:",
+      "warning_text": "Se você salvar o arquivo com um erro de sintaxe, o servidor pode parar. Se isso acontecer, corrija o erro e execute o comando `uv run python main.py` novamente."
+    },
+    "tutorial": {
+      "title": "Construindo o Dashboard: Passo a Passo",
+      "description": "Agora que o ambiente está configurado, vamos transformar nosso app mínimo em um dashboard completo para análise de dados de ecocardiogramas. Cada passo adiciona uma nova funcionalidade ao nosso projeto.",
+      "step1_title": "Passo 1: Baixe o Conjunto de Dados",
+      "step1_description": "O primeiro passo é obter os dados.\n\n1. Acesse o Heart Disease Dataset no Kaggle.\n2. Baixe e extraia o arquivo `archive.zip`.\n3. Mova o `heart.csv` para a pasta do seu projeto.",
+      "step2_title": "Passo 2: Imports e Leitura dos Dados",
+      "step2_description": "Apague o código mínimo e comece com as importações específicas. Carregue o arquivo `heart.csv` que você baixou. Execute para verificar se não há erros de importação.",
+      "step3_title": "Passo 3: Estrutura Básica do Layout",
+      "step3_description": "Criamos a estrutura usando `dmc.AppShell()` com cabeçalho (`AppShellHeader`) e área principal (`AppShellMain`). O `MantineProvider` fornece temas consistentes.",
+      "step4_title": "Passo 4: Primeiro Gráfico",
+      "step4_description": "Adicionamos nosso primeiro gráfico usando `px.histogram()` dentro de um `dmc.Card()`. O card possui seções para título e conteúdo, criando uma apresentação organizada.",
+      "step5_title": "Passo 5: Sistema de Grid com Múltiplos Gráficos",
+      "step5_description": "Implementamos um sistema de grid usando `dmc.Grid()` e `dmc.GridCol()` para organizar quatro tipos diferentes de gráficos: histograma, barra, scatter e box plot.",
+      "step6_title": "Passo 6: Tabela de Dados Interativa",
+      "step6_description": "Adicionamos uma tabela interativa usando `dag.AgGrid()` que permite ordenação, filtro e redimensionamento de colunas. A tabela ocupa a largura total com `span=12`.",
+      "step7_title": "Passo 7: Botão de Alternância de Tema",
+      "step7_description": "Adicionamos um `dmc.Switch()` com ícones do `DashIconify` para alternar entre temas claro e escuro. O `persistence=True` mantém a preferência do usuário.",
+      "step8_title": "Passo 8: Callbacks e Interatividade",
+      "step8_description": "Implementamos um `clientside_callback()` que executa JavaScript no navegador para alternar o tema instantaneamente, sem precisar comunicar com o servidor Python.",
+      "step9_title": "Passo 9: Dashboard Completo e Interativo",
+      "step9_description": "Parabéns! Você construiu um dashboard completo seguindo uma abordagem incremental. Cada passo adicionou uma funcionalidade específica, permitindo compreender como cada elemento contribui para o resultado final.",
+      "concepts_title": "📚 Conceitos Aprendidos:",
+      "concepts": [
+        "• Importações organizadas: Como estruturar as dependências do projeto",
+        "• Layout responsivo: Uso do AppShell e sistema de Grid",
+        "• Componentes visuais: Cards, seções e elementos de UI",
+        "• Visualizações de dados: Diferentes tipos de gráficos com Plotly",
+        "• Tabelas interativas: AG-Grid com funcionalidades avançadas",
+        "• Temas dinâmicos: Sistema de alternância claro/escuro",
+        "• Callbacks: Interatividade client-side e server-side"
+      ]
+    },
+    "footer": {
+      "acknowledgments": "Agradecimentos",
+      "acknowledgments_text": "Um agradecimento especial ao LaPS - Laboratório de Processamento de Sinais da UFPA pelo apoio e ao professor Ronaldo de Freitas Zampolo pela orientação.",
+      "about_author": "Sobre o Autor",
+      "author_name": "João Natividade Neto",
+      "author_description": "Graduando em Engenharia de Computação na Universidade Federal do Pará - UFPA.",
+      "copyright": "© 2025 Guia Dash. Criado para fins educacionais."
+    }
+  },
+  "en": {
+    "navbar": {
+      "title": "Dash Guide",
+      "objectives": "Objectives",
+      "installation": "Installation",
+      "tutorial": "Tutorial",
+      "theme_dark": "Dark Theme",
+      "theme_light": "Light Theme"
+    },
+    "hero": {
+      "title": "Practical Guide for Students:",
+      "subtitle": "Interactive Dashboards with Dash and Plotly",
+      "description": "A complete guide to creating dynamic and impactful data visualizations using Python.",
+      "start_button": "Start Tutorial"
+    },
+    "objectives": {
+      "title": "Guide Objectives",
+      "description": "This guide was developed to guide undergraduate students on their journey to create interactive dashboards. Our main objectives are:",
+      "card1_title": "Introduce Concepts",
+      "card1_description": "Present the fundamental concepts behind data visualization and the importance of dashboards in information analysis.",
+      "card2_title": "Teach Tools",
+      "card2_description": "Enable students with practical knowledge of Dash and Plotly libraries for building dashboards in Python.",
+      "card3_title": "Inspire with Examples",
+      "card3_description": "Provide practical examples with source code that serve as a foundation and inspiration for students' future projects."
+    },
+    "installation": {
+      "title": "Installation and Configuration",
+      "description": "Follow these steps to configure your development environment and run your first dashboard.",
+      "step1_title": "1. Install Visual Studio Code",
+      "step1_description": "VS Code is a lightweight but powerful source code editor that runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js and has a rich ecosystem of extensions for other languages (such as Python) and runtimes.",
+      "step2_title": "2. Install `uv` (Package Manager)",
+      "step2_description": "`uv` is an extremely fast Python package installer and resolver written in Rust. It is designed as a drop-in replacement for `pip` and `pip-tools`. To install it, follow the instructions on the",
+      "step3_title": "3. Initialize your Project",
+      "step3_description": "Navigate to your project folder in the terminal and run the command below. This will create a virtual environment and the `pyproject.toml` file, which manages your project dependencies.",
+      "step4_title": "4. Add Dependencies",
+      "step4_description": "Now, install the Python libraries needed for our project. This command will add `dash`, `pandas` and other useful libraries to your environment.",
+      "step5_title": "5. Create the Minimal Application",
+      "step5_description": "Create a file called `main.py` and add the following code. This is an interactive Dash app to ensure our setup is working and to test hot-reload.",
+      "step6_title": "6. Run and Test Hot-Reload",
+      "step6_description": "Run the application. The `debug=True` option enables \"Hot Reload\", which automatically reloads the server whenever you save a change to the code.",
+      "warning": "Warning:",
+      "warning_text": "If you save the file with a syntax error, the server may stop. If this happens, fix the error and run the command `uv run python main.py` again."
+    },
+    "tutorial": {
+      "title": "Building the Dashboard: Step by Step",
+      "description": "Now that the environment is configured, let's transform our minimal app into a complete dashboard for echocardiogram data analysis. Each step adds a new functionality to our project.",
+      "step1_title": "Step 1: Download the Dataset",
+      "step1_description": "The first step is to obtain the data.\n\n1. Access the Heart Disease Dataset on Kaggle.\n2. Download and extract the `archive.zip` file.\n3. Move the `heart.csv` to your project folder.",
+      "step2_title": "Step 2: Imports and Data Loading",
+      "step2_description": "Delete the minimal code and start with specific imports. Load the `heart.csv` file you downloaded. Run to check for import errors.",
+      "step3_title": "Step 3: Basic Layout Structure",
+      "step3_description": "We create the structure using `dmc.AppShell()` with header (`AppShellHeader`) and main area (`AppShellMain`). The `MantineProvider` provides consistent themes.",
+      "step4_title": "Step 4: First Graph",
+      "step4_description": "We add our first graph using `px.histogram()` inside a `dmc.Card()`. The card has sections for title and content, creating an organized presentation.",
+      "step5_title": "Step 5: Grid System with Multiple Charts",
+      "step5_description": "We implement a grid system using `dmc.Grid()` and `dmc.GridCol()` to organize four different types of charts: histogram, bar, scatter and box plot.",
+      "step6_title": "Step 6: Interactive Data Table",
+      "step6_description": "We add an interactive table using `dag.AgGrid()` that allows sorting, filtering and column resizing. The table takes full width with `span=12`.",
+      "step7_title": "Step 7: Theme Toggle Button",
+      "step7_description": "We add a `dmc.Switch()` with `DashIconify` icons to toggle between light and dark themes. The `persistence=True` maintains user preference.",
+      "step8_title": "Step 8: Callbacks and Interactivity",
+      "step8_description": "We implement a `clientside_callback()` that runs JavaScript in the browser to toggle the theme instantly, without needing to communicate with the Python server.",
+      "step9_title": "Step 9: Complete and Interactive Dashboard",
+      "step9_description": "Congratulations! You built a complete dashboard following an incremental approach. Each step added a specific functionality, allowing you to understand how each element contributes to the final result.",
+      "concepts_title": "📚 Concepts Learned:",
+      "concepts": [
+        "• Organized imports: How to structure project dependencies",
+        "• Responsive layout: Using AppShell and Grid system",
+        "• Visual components: Cards, sections and UI elements",
+        "• Data visualizations: Different types of charts with Plotly",
+        "• Interactive tables: AG-Grid with advanced features",
+        "• Dynamic themes: Light/dark toggle system",
+        "• Callbacks: Client-side and server-side interactivity"
+      ]
+    },
+    "footer": {
+      "acknowledgments": "Acknowledgments",
+      "acknowledgments_text": "Special thanks to LaPS - Signal Processing Laboratory at UFPA for the support and to professor Ronaldo de Freitas Zampolo for the guidance.",
+      "about_author": "About the Author",
+      "author_name": "João Natividade Neto",
+      "author_description": "Computer Engineering undergraduate at Federal University of Pará - UFPA.",
+      "copyright": "© 2025 Dash Guide. Created for educational purposes."
+    }
+  },
+  "de": {
+    "navbar": {
+      "title": "Dash-Leitfaden",
+      "objectives": "Ziele",
+      "installation": "Installation",
+      "tutorial": "Tutorial",
+      "theme_dark": "Dunkles Thema",
+      "theme_light": "Helles Thema"
+    },
+    "hero": {
+      "title": "Praktischer Leitfaden für Studenten:",
+      "subtitle": "Interaktive Dashboards mit Dash und Plotly",
+      "description": "Ein vollständiger Leitfaden zur Erstellung dynamischer und wirkungsvoller Datenvisualisierungen mit Python.",
+      "start_button": "Tutorial starten"
+    },
+    "objectives": {
+      "title": "Leitfaden-Ziele",
+      "description": "Dieser Leitfaden wurde entwickelt, um Studenten auf ihrer Reise zur Erstellung interaktiver Dashboards zu begleiten. Unsere Hauptziele sind:",
+      "card1_title": "Konzepte einführen",
+      "card1_description": "Die grundlegenden Konzepte der Datenvisualisierung und die Bedeutung von Dashboards in der Informationsanalyse vorstellen.",
+      "card2_title": "Werkzeuge lehren",
+      "card2_description": "Studenten mit praktischen Kenntnissen der Dash- und Plotly-Bibliotheken für die Erstellung von Dashboards in Python ausstatten.",
+      "card3_title": "Mit Beispielen inspirieren",
+      "card3_description": "Praktische Beispiele mit Quellcode bereitstellen, die als Grundlage und Inspiration für zukünftige Projekte der Studenten dienen."
+    },
+    "installation": {
+      "title": "Installation und Konfiguration",
+      "description": "Befolgen Sie diese Schritte, um Ihre Entwicklungsumgebung zu konfigurieren und Ihr erstes Dashboard auszuführen.",
+      "step1_title": "1. Visual Studio Code installieren",
+      "step1_description": "VS Code ist ein leichtgewichtiger, aber leistungsstarker Quellcode-Editor, der auf Ihrem Desktop läuft und für Windows, macOS und Linux verfügbar ist. Er bietet integrierte Unterstützung für JavaScript, TypeScript und Node.js und verfügt über ein reiches Ökosystem von Erweiterungen für andere Sprachen (wie Python) und Laufzeiten.",
+      "step2_title": "2. `uv` installieren (Paket-Manager)",
+      "step2_description": "`uv` ist ein extrem schneller Python-Paket-Installer und -Resolver, der in Rust geschrieben ist. Er ist als Drop-in-Ersatz für `pip` und `pip-tools` konzipiert. Um ihn zu installieren, folgen Sie den Anweisungen auf der",
+      "step3_title": "3. Projekt initialisieren",
+      "step3_description": "Navigieren Sie im Terminal zu Ihrem Projektordner und führen Sie den folgenden Befehl aus. Dies erstellt eine virtuelle Umgebung und die `pyproject.toml`-Datei, die Ihre Projektabhängigkeiten verwaltet.",
+      "step4_title": "4. Abhängigkeiten hinzufügen",
+      "step4_description": "Installieren Sie nun die für unser Projekt benötigten Python-Bibliotheken. Dieser Befehl fügt `dash`, `pandas` und andere nützliche Bibliotheken zu Ihrer Umgebung hinzu.",
+      "step5_title": "5. Minimale Anwendung erstellen",
+      "step5_description": "Erstellen Sie eine Datei namens `main.py` und fügen Sie den folgenden Code hinzu. Dies ist eine interaktive Dash-App, um sicherzustellen, dass unser Setup funktioniert und Hot-Reload zu testen.",
+      "step6_title": "6. Hot-Reload ausführen und testen",
+      "step6_description": "Führen Sie die Anwendung aus. Die Option `debug=True` aktiviert \"Hot Reload\", das den Server automatisch neu lädt, wann immer Sie eine Änderung am Code speichern.",
+      "warning": "Achtung:",
+      "warning_text": "Wenn Sie die Datei mit einem Syntaxfehler speichern, kann der Server stoppen. Falls dies passiert, beheben Sie den Fehler und führen Sie den Befehl `uv run python main.py` erneut aus."
+    },
+    "tutorial": {
+      "title": "Dashboard erstellen: Schritt für Schritt",
+      "description": "Nachdem die Umgebung konfiguriert ist, transformieren wir unsere minimale App in ein vollständiges Dashboard für die Analyse von Echokardiogramm-Daten. Jeder Schritt fügt eine neue Funktionalität zu unserem Projekt hinzu.",
+      "step1_title": "Schritt 1: Dataset herunterladen",
+      "step1_description": "Der erste Schritt ist, die Daten zu erhalten.\n\n1. Greifen Sie auf das Heart Disease Dataset auf Kaggle zu.\n2. Laden Sie die `archive.zip`-Datei herunter und extrahieren Sie sie.\n3. Verschieben Sie die `heart.csv` in Ihren Projektordner.",
+      "step2_title": "Schritt 2: Imports und Datenladen",
+      "step2_description": "Löschen Sie den minimalen Code und beginnen Sie mit spezifischen Imports. Laden Sie die `heart.csv`-Datei, die Sie heruntergeladen haben. Führen Sie aus, um auf Import-Fehler zu prüfen.",
+      "step3_title": "Schritt 3: Grundlegende Layout-Struktur",
+      "step3_description": "Wir erstellen die Struktur mit `dmc.AppShell()` mit Header (`AppShellHeader`) und Hauptbereich (`AppShellMain`). Der `MantineProvider` bietet konsistente Themes.",
+      "step4_title": "Schritt 4: Erstes Diagramm",
+      "step4_description": "Wir fügen unser erstes Diagramm mit `px.histogram()` innerhalb einer `dmc.Card()` hinzu. Die Karte hat Abschnitte für Titel und Inhalt, was eine organisierte Präsentation schafft.",
+      "step5_title": "Schritt 5: Grid-System mit mehreren Diagrammen",
+      "step5_description": "Wir implementieren ein Grid-System mit `dmc.Grid()` und `dmc.GridCol()`, um vier verschiedene Diagrammtypen zu organisieren: Histogramm, Balken, Scatter und Box Plot.",
+      "step6_title": "Schritt 6: Interaktive Datentabelle",
+      "step6_description": "Wir fügen eine interaktive Tabelle mit `dag.AgGrid()` hinzu, die Sortierung, Filterung und Spaltengrößenänderung ermöglicht. Die Tabelle nimmt die volle Breite mit `span=12` ein.",
+      "step7_title": "Schritt 7: Theme-Umschalt-Button",
+      "step7_description": "Wir fügen einen `dmc.Switch()` mit `DashIconify`-Icons hinzu, um zwischen hellen und dunklen Themes zu wechseln. Das `persistence=True` behält die Benutzereinstellung bei.",
+      "step8_title": "Schritt 8: Callbacks und Interaktivität",
+      "step8_description": "Wir implementieren einen `clientside_callback()`, der JavaScript im Browser ausführt, um das Theme sofort zu wechseln, ohne mit dem Python-Server kommunizieren zu müssen.",
+      "step9_title": "Schritt 9: Vollständiges und interaktives Dashboard",
+      "step9_description": "Herzlichen Glückwunsch! Sie haben ein vollständiges Dashboard mit einem schrittweisen Ansatz erstellt. Jeder Schritt fügte eine spezifische Funktionalität hinzu, sodass Sie verstehen können, wie jedes Element zum Endergebnis beiträgt.",
+      "concepts_title": "📚 Gelernte Konzepte:",
+      "concepts": [
+        "• Organisierte Imports: Wie man Projektabhängigkeiten strukturiert",
+        "• Responsives Layout: Verwendung von AppShell und Grid-System",
+        "• Visuelle Komponenten: Cards, Abschnitte und UI-Elemente",
+        "• Datenvisualisierungen: Verschiedene Diagrammtypen mit Plotly",
+        "• Interaktive Tabellen: AG-Grid mit erweiterten Funktionen",
+        "• Dynamische Themes: Hell/Dunkel-Umschaltsystem",
+        "• Callbacks: Client-seitige und server-seitige Interaktivität"
+      ]
+    },
+    "footer": {
+      "acknowledgments": "Danksagungen",
+      "acknowledgments_text": "Besonderen Dank an LaPS - Signalverarbeitungslabor an der UFPA für die Unterstützung und an Professor Ronaldo de Freitas Zampolo für die Betreuung.",
+      "about_author": "Über den Autor",
+      "author_name": "João Natividade Neto",
+      "author_description": "Student der Computertechnik an der Bundesuniversität von Pará - UFPA.",
+      "copyright": "© 2025 Dash-Leitfaden. Erstellt für Bildungszwecke."
+    }
+  }
+}
