@@ -328,7 +328,7 @@ if __name__ == '__main__':
                 <div class="text-center">
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4" data-translate="tutorial.title">Construindo o Dashboard: Passo a Passo</h2>
                     <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto" data-translate="tutorial.description">
-                        Agora que o ambiente está configurado, vamos transformar nosso app mínimo em um dashboard completo para análise de dados de ecocardiogramas. Cada passo adiciona uma nova funcionalidade ao nosso projeto.
+                        Agora que o ambiente está configurado, transforme seu app mínimo em um dashboard completo para análise de dados de ecocardiogramas. Cada passo adiciona uma nova funcionalidade ao nosso projeto.
                     </p>
                 </div>
                 <div class="space-y-24 mt-16">
@@ -449,7 +449,7 @@ app.layout = dmc.MantineProvider(layout)</code></pre>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step3_title">Passo 3: Estrutura Básica do Layout</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step3_description">Criamos a estrutura usando [`dmc.AppShell()`](main.py:1) com cabeçalho ([`AppShellHeader`](main.py:1)) e área principal ([`AppShellMain`](main.py:1)). O [`MantineProvider`](main.py:1) fornece temas consistentes.</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step3_description">Crie a estrutura usando [`dmc.AppShell()`](main.py:1) com cabeçalho ([`AppShellHeader`](main.py:1)) e área principal ([`AppShellMain`](main.py:1)). O [`MantineProvider`](main.py:1) fornece temas consistentes.</p>
                         </div>
                     </div>
 
@@ -510,7 +510,7 @@ dmc.AppShellMain(
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step4_title">Passo 4: Primeiro Gráfico</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step4_description">Adicionamos nosso primeiro gráfico usando [`px.histogram()`](main.py:1) dentro de um [`dmc.Card()`](main.py:1). O card possui seções para título e conteúdo, criando uma apresentação organizada.</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step4_description">Adicione seu primeiro gráfico usando [`px.histogram()`](main.py:1) dentro de um [`dmc.Card()`](main.py:1). O card possui seções para título e conteúdo, criando uma apresentação organizada.</p>
                         </div>
                     </div>
 
@@ -584,7 +584,7 @@ dmc.AppShellMain(
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step5_title">Passo 5: Sistema de Grid com Múltiplos Gráficos</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step5_description">Implementamos um sistema de grid usando [`dmc.Grid()`](main.py:1) e [`dmc.GridCol()`](main.py:1) para organizar quatro tipos diferentes de gráficos: histograma, barra, scatter e box plot.</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step5_description">Implemente um sistema de grid usando [`dmc.Grid()`](main.py:1) e [`dmc.GridCol()`](main.py:1) para organizar quatro tipos diferentes de gráficos: histograma, barra, scatter e box plot.</p>
                         </div>
                     </div>
 
@@ -639,7 +639,7 @@ tabela = dag.AgGrid(
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step6_title">Passo 6: Tabela de Dados Interativa</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step6_description">Adicionamos uma tabela interativa usando [`dag.AgGrid()`](main.py:1) que permite ordenação, filtro e redimensionamento de colunas. A tabela ocupa a largura total com [`span=12`](main.py:1).</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step6_description">Adicione uma tabela interativa usando [`dag.AgGrid()`](main.py:1) que permite ordenação, filtro e redimensionamento de colunas. A tabela ocupa a largura total com [`span=12`](main.py:1).</p>
                         </div>
                     </div>
 
@@ -694,7 +694,7 @@ botao_troca_tema = dmc.Switch(
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step7_title">Passo 7: Botão de Alternância de Tema</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step7_description">Adicionamos um [`dmc.Switch()`](main.py:1) com ícones do [`DashIconify`](main.py:1) para alternar entre temas claro e escuro. O [`persistence=True`](main.py:1) mantém a preferência do usuário.</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step7_description">Adicione um [`dmc.Switch()`](main.py:1) com ícones do [`DashIconify`](main.py:1) para alternar entre temas claro e escuro. O [`persistence=True`](main.py:1) mantém a preferência do usuário.</p>
                         </div>
                     </div>
 
@@ -745,7 +745,7 @@ clientside_callback(
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/3 text-center md:text-left">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white" data-translate="tutorial.step8_title">Passo 8: Callbacks e Interatividade</h3>
-                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step8_description">Implementamos um [`clientside_callback()`](main.py:1) que executa JavaScript no navegador para alternar o tema instantaneamente, sem precisar comunicar com o servidor Python.</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-400" data-translate="tutorial.step8_description">Implemente um [`clientside_callback()`](main.py:1) que executa JavaScript no navegador para alternar o tema instantaneamente, sem precisar comunicar com o servidor Python.</p>
                         </div>
                     </div>
                     
